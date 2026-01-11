@@ -1,0 +1,55 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+*.xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcarchive
+*.dSYM
+*.dSYM.zip
+*.hmap
+*.ipa
+*.xcodeproj/project.xcworkspace/
+
+# Swift Package Manager
+.build/
+Packages/
+
+# Logs and temp
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Local env/config
+.env
+.env.*
+*.env
+*.local
+*.xcconfig.local
+*.xcconfig.user
+
+# Keys and secrets
+*.p12
+*.p8
+*.pem
+*.key
+*.cer
+*.crt
+*.mobileprovision
+*.keystore
+*.jks
+**/Secrets.plist
+**/Secret.plist
+**/Secrets.*
