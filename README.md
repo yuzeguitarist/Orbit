@@ -104,9 +104,6 @@ Issues and PRs are welcome. Please keep PRs focused and describe the behavior cl
 This project is partially open-sourced under **GPL-3.0 + Commons Clause**.
 See `LICENSE` for details.
 
-> Open-sourced scope: scripting interfaces, export, SQL storage, encryption/security,
-> and selected utilities. Core UI/UX and value-added logic remain closed source.
-
 In short:
 - Free for personal and non-commercial use.
 - You may study and modify the open-sourced portions.
@@ -174,9 +171,6 @@ brew install --cask orbit
 
 ## 许可证
 本项目为 **部分开源**，采用 **GPL-3.0 + Commons Clause** 许可证 - 详见 `LICENSE`。
-
-> 开源范围: 脚本接口、导出、SQL 存储、加密安全和部分工具;
-> 核心 UI/UX、增值逻辑等保持闭源。
 
 简单来说:
 - 个人/非商业免费使用。
