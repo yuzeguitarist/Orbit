@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "Enabled";
+"menu.permission.required" = "Needs Permission";
+"menu.help.trigger" = "Hold %@ to open the switcher";
+"menu.accessibility.authorize" = "Authorize Accessibility...";
+"menu.settings" = "Settings...";
+"menu.quit" = "Quit Orbit";
+
+"settings.title" = "Settings";
+"settings.permission.granted" = "Accessibility permission granted";
+"settings.permission.required" = "Accessibility permission required";
+"settings.permission.authorize" = "Authorize";
+"settings.section.trigger" = "Trigger";
+"settings.trigger.modifier" = "Trigger key";
+"settings.trigger.threshold" = "Long press threshold";
+"settings.long_press_value" = "%d ms";
+"settings.section.launch" = "Startup";
+"settings.launch_at_login" = "Launch at login";
+"settings.launch_at_login.unsupported" = "Launch at login requires macOS 13 or later.";
+"settings.section.usage" = "Usage";
+"settings.usage.line1" = "- Hold %@ to open the switcher";
+"settings.usage.line2" = "- Use arrow keys or Tab to select apps";
+"settings.usage.line3" = "- Type a letter, or press Enter / click to launch";
+"settings.usage.line4" = "- Release the modifier to close";
+
+"main.help.trigger" = "Hold %@ to open the app switcher";
+"main.help.hint" = "Release to close | Letters / Tab / Enter to switch";
+"main.permission.required" = "Accessibility permission required";
+"main.permission.details" = "Enable Orbit in Accessibility settings";
+"main.permission.open_settings" = "Open System Settings";
+"main.permission.check" = "Check Permission";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "Appearance";
+"settings.card_size" = "Card size";
+
+"cardSize.small" = "Small";
+"cardSize.medium" = "Medium";
+"cardSize.large" = "Large";
+"cardSize.extraLarge" = "Extra Large";
+ 
+"settings.card_material" = "Card material";
+"cardMaterial.white" = "White";
+"cardMaterial.black" = "Black";
+"cardMaterial.system" = "System";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "The ultimate launcher for macOS.\nFast, minimal, and powerful.";
+"welcome.start" = "Start Using";
