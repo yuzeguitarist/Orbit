@@ -102,7 +102,7 @@ Issues and PRs are welcome. Please keep PRs focused and describe the behavior cl
 
 ## License
 This project is partially open-sourced under **GPL-3.0 + Commons Clause**.
-See `Orbit_Cloud/LICENSE` for details.
+See `LICENSE` for details.
 
 > Open-sourced scope: scripting interfaces, export, SQL storage, encryption/security,
 > and selected utilities. Core UI/UX and value-added logic remain closed source.
@@ -173,7 +173,7 @@ brew install --cask orbit
 - 右键菜单栏图标可进入设置或退出。
 
 ## 许可证
-本项目为 **部分开源**，采用 **GPL-3.0 + Commons Clause** 许可证 - 详见 `Orbit_Cloud/LICENSE`。
+本项目为 **部分开源**，采用 **GPL-3.0 + Commons Clause** 许可证 - 详见 `LICENSE`。
 
 > 开源范围: 脚本接口、导出、SQL 存储、加密安全和部分工具;
 > 核心 UI/UX、增值逻辑等保持闭源。
