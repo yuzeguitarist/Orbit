@@ -69,7 +69,7 @@ Because the app is not signed or notarized, Gatekeeper will warn. Follow these s
    `~/Library/Containers/com.yuzeguitar.Orbit` and `~/Library/Preferences/com.yuzeguitar.Orbit.plist`.
 
 ## Requirements
-- macOS 15 (Sequoia) or later.
+- macOS 14.6 (Sonoma) or later.
 - Accessibility permission for global hotkey activation.
 - AirDrop requires compatible devices with Wi-Fi/Bluetooth enabled.
 
@@ -157,7 +157,7 @@ brew install --cask orbit
    `~/Library/Containers/com.yuzeguitar.Orbit` 和 `~/Library/Preferences/com.yuzeguitar.Orbit.plist`。
 
 ### 运行要求
-- macOS 15 (Sequoia) 或更高版本。
+- macOS 14.6 (Sonoma) 或更高版本。
 - 需要授予 Accessibility 权限以启用全局快捷键。
 - AirDrop 需要兼容设备并开启 Wi-Fi/蓝牙。
 
