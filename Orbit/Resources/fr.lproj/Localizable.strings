@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "Activé";
+"menu.permission.required" = "Autorisation requise";
+"menu.help.trigger" = "Maintenez %@ pour ouvrir le sélecteur";
+"menu.accessibility.authorize" = "Autoriser l'accessibilité...";
+"menu.settings" = "Réglages...";
+"menu.quit" = "Quitter Orbit";
+
+"settings.title" = "Réglages";
+"settings.permission.granted" = "Autorisation d'accessibilité accordée";
+"settings.permission.required" = "Autorisation d'accessibilité requise";
+"settings.permission.authorize" = "Autoriser";
+"settings.section.trigger" = "Déclencheur";
+"settings.trigger.modifier" = "Touche de déclenchement";
+"settings.trigger.threshold" = "Seuil d'appui long";
+"settings.long_press_value" = "%d ms";
+"settings.section.launch" = "Démarrage";
+"settings.launch_at_login" = "Lancer à l'ouverture de session";
+"settings.launch_at_login.unsupported" = "Le lancement à l'ouverture de session nécessite macOS 13 ou ultérieur.";
+"settings.section.usage" = "Utilisation";
+"settings.usage.line1" = "- Maintenez %@ pour ouvrir le sélecteur";
+"settings.usage.line2" = "- Utilisez les flèches ou Tab pour sélectionner des applications";
+"settings.usage.line3" = "- Tapez une lettre, ou appuyez sur Entrée / cliquez pour lancer";
+"settings.usage.line4" = "- Relâchez la touche modificatrice pour fermer";
+
+"main.help.trigger" = "Maintenez %@ pour ouvrir le sélecteur d'applications";
+"main.help.hint" = "Relâchez pour fermer | Lettres / Tab / Entrée pour basculer";
+"main.permission.required" = "Autorisation d'accessibilité requise";
+"main.permission.details" = "Activez Orbit dans les réglages d'accessibilité";
+"main.permission.open_settings" = "Ouvrir Réglages système";
+"main.permission.check" = "Vérifier l'autorisation";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "Apparence";
+"settings.card_size" = "Taille des cartes";
+
+"cardSize.small" = "Petite";
+"cardSize.medium" = "Moyenne";
+"cardSize.large" = "Grande";
+"cardSize.extraLarge" = "Très grande";
+
+"settings.card_material" = "Matériau des cartes";
+"cardMaterial.white" = "Blanc";
+"cardMaterial.black" = "Noir";
+"cardMaterial.system" = "Système";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "Le lanceur ultime pour macOS.\nRapide, minimal et puissant.";
+"welcome.start" = "Commencer";

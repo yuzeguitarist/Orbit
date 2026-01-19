@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "활성화됨";
+"menu.permission.required" = "권한 필요";
+"menu.help.trigger" = "%@를 길게 눌러 전환기 열기";
+"menu.accessibility.authorize" = "손쉬운 사용 허용...";
+"menu.settings" = "설정...";
+"menu.quit" = "Orbit 종료";
+
+"settings.title" = "설정";
+"settings.permission.granted" = "손쉬운 사용 권한이 허용됨";
+"settings.permission.required" = "손쉬운 사용 권한 필요";
+"settings.permission.authorize" = "허용";
+"settings.section.trigger" = "트리거";
+"settings.trigger.modifier" = "트리거 키";
+"settings.trigger.threshold" = "길게 누름 임계값";
+"settings.long_press_value" = "%d ms";
+"settings.section.launch" = "시작";
+"settings.launch_at_login" = "로그인 시 시작";
+"settings.launch_at_login.unsupported" = "로그인 시 시작은 macOS 13 이상이 필요합니다.";
+"settings.section.usage" = "사용법";
+"settings.usage.line1" = "- %@를 길게 눌러 전환기 열기";
+"settings.usage.line2" = "- 화살표 키 또는 Tab으로 앱 선택";
+"settings.usage.line3" = "- 글자를 입력하거나 Enter / 클릭으로 실행";
+"settings.usage.line4" = "- 보조 키를 놓으면 닫힘";
+
+"main.help.trigger" = "%@를 길게 눌러 앱 전환기 열기";
+"main.help.hint" = "놓으면 닫힘 | 글자 / Tab / Enter로 전환";
+"main.permission.required" = "손쉬운 사용 권한 필요";
+"main.permission.details" = "시스템 설정의 손쉬운 사용에서 Orbit을 활성화하세요";
+"main.permission.open_settings" = "시스템 설정 열기";
+"main.permission.check" = "권한 확인";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "모양";
+"settings.card_size" = "카드 크기";
+
+"cardSize.small" = "작게";
+"cardSize.medium" = "중간";
+"cardSize.large" = "크게";
+"cardSize.extraLarge" = "아주 크게";
+
+"settings.card_material" = "카드 재질";
+"cardMaterial.white" = "흰색";
+"cardMaterial.black" = "검은색";
+"cardMaterial.system" = "시스템";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "macOS용 궁극의 런처.\n빠르고, 미니멀하며, 강력합니다.";
+"welcome.start" = "시작하기";

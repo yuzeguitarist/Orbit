@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "Aktiveret";
+"menu.permission.required" = "Tilladelse kræves";
+"menu.help.trigger" = "Hold %@ nede for at åbne omskifteren";
+"menu.accessibility.authorize" = "Tillad Hjælpemidler...";
+"menu.settings" = "Indstillinger...";
+"menu.quit" = "Afslut Orbit";
+
+"settings.title" = "Indstillinger";
+"settings.permission.granted" = "Tilladelse til hjælpemidler givet";
+"settings.permission.required" = "Tilladelse til hjælpemidler kræves";
+"settings.permission.authorize" = "Tillad";
+"settings.section.trigger" = "Udløser";
+"settings.trigger.modifier" = "Udløsertast";
+"settings.trigger.threshold" = "Tærskel for langt tryk";
+"settings.long_press_value" = "%d ms";
+"settings.section.launch" = "Opstart";
+"settings.launch_at_login" = "Start ved login";
+"settings.launch_at_login.unsupported" = "Start ved login kræver macOS 13 eller nyere.";
+"settings.section.usage" = "Brug";
+"settings.usage.line1" = "- Hold %@ nede for at åbne omskifteren";
+"settings.usage.line2" = "- Brug piletaster eller Tab til at vælge apps";
+"settings.usage.line3" = "- Skriv et bogstav eller tryk Enter / klik for at starte";
+"settings.usage.line4" = "- Slip modifikatortasten for at lukke";
+
+"main.help.trigger" = "Hold %@ nede for at åbne app-omskifteren";
+"main.help.hint" = "Slip for at lukke | Bogstaver / Tab / Enter for at skifte";
+"main.permission.required" = "Tilladelse til hjælpemidler kræves";
+"main.permission.details" = "Aktivér Orbit i Hjælpemidler-indstillinger";
+"main.permission.open_settings" = "Åbn Systemindstillinger";
+"main.permission.check" = "Kontrollér tilladelse";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "Udseende";
+"settings.card_size" = "Kortstørrelse";
+
+"cardSize.small" = "Lille";
+"cardSize.medium" = "Mellem";
+"cardSize.large" = "Stor";
+"cardSize.extraLarge" = "Ekstra stor";
+
+"settings.card_material" = "Kortmateriale";
+"cardMaterial.white" = "Hvid";
+"cardMaterial.black" = "Sort";
+"cardMaterial.system" = "System";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "Den ultimative launcher til macOS.\nHurtig, minimal og kraftfuld.";
+"welcome.start" = "Kom i gang";

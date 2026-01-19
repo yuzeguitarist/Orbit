@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "Включено";
+"menu.permission.required" = "Требуется разрешение";
+"menu.help.trigger" = "Удерживайте %@, чтобы открыть переключатель";
+"menu.accessibility.authorize" = "Разрешить доступ к специальным возможностям...";
+"menu.settings" = "Настройки...";
+"menu.quit" = "Выйти из Orbit";
+
+"settings.title" = "Настройки";
+"settings.permission.granted" = "Доступ к специальным возможностям предоставлен";
+"settings.permission.required" = "Требуется доступ к специальным возможностям";
+"settings.permission.authorize" = "Разрешить";
+"settings.section.trigger" = "Триггер";
+"settings.trigger.modifier" = "Клавиша-триггер";
+"settings.trigger.threshold" = "Порог долгого нажатия";
+"settings.long_press_value" = "%d мс";
+"settings.section.launch" = "Запуск";
+"settings.launch_at_login" = "Запуск при входе";
+"settings.launch_at_login.unsupported" = "Запуск при входе требует macOS 13 или новее.";
+"settings.section.usage" = "Использование";
+"settings.usage.line1" = "- Удерживайте %@, чтобы открыть переключатель";
+"settings.usage.line2" = "- Используйте стрелки или Tab для выбора приложений";
+"settings.usage.line3" = "- Введите букву или нажмите Enter / кликните для запуска";
+"settings.usage.line4" = "- Отпустите модификатор для закрытия";
+
+"main.help.trigger" = "Удерживайте %@, чтобы открыть переключатель приложений";
+"main.help.hint" = "Отпустите, чтобы закрыть | Буквы / Tab / Enter для переключения";
+"main.permission.required" = "Требуется доступ к специальным возможностям";
+"main.permission.details" = "Включите Orbit в настройках специальных возможностей";
+"main.permission.open_settings" = "Открыть настройки системы";
+"main.permission.check" = "Проверить доступ";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "Внешний вид";
+"settings.card_size" = "Размер карточек";
+
+"cardSize.small" = "Маленький";
+"cardSize.medium" = "Средний";
+"cardSize.large" = "Большой";
+"cardSize.extraLarge" = "Очень большой";
+
+"settings.card_material" = "Материал карточек";
+"cardMaterial.white" = "Белый";
+"cardMaterial.black" = "Черный";
+"cardMaterial.system" = "Системный";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "Идеальный лаунчер для macOS.\nБыстрый, минималистичный и мощный.";
+"welcome.start" = "Начать";

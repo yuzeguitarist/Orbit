@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "有効";
+"menu.permission.required" = "権限が必要";
+"menu.help.trigger" = "%@ を長押ししてスイッチャーを開く";
+"menu.accessibility.authorize" = "アクセシビリティを許可...";
+"menu.settings" = "設定...";
+"menu.quit" = "Orbit を終了";
+
+"settings.title" = "設定";
+"settings.permission.granted" = "アクセシビリティの許可が付与されました";
+"settings.permission.required" = "アクセシビリティの許可が必要です";
+"settings.permission.authorize" = "許可";
+"settings.section.trigger" = "トリガー";
+"settings.trigger.modifier" = "トリガーキー";
+"settings.trigger.threshold" = "長押しのしきい値";
+"settings.long_press_value" = "%d ミリ秒";
+"settings.section.launch" = "起動";
+"settings.launch_at_login" = "ログイン時に起動";
+"settings.launch_at_login.unsupported" = "ログイン時の起動には macOS 13 以降が必要です。";
+"settings.section.usage" = "使い方";
+"settings.usage.line1" = "- %@ を長押ししてスイッチャーを開く";
+"settings.usage.line2" = "- 矢印キーまたは Tab でアプリを選択";
+"settings.usage.line3" = "- 文字を入力するか、Enter / クリックで起動";
+"settings.usage.line4" = "- 修飾キーを離すと閉じます";
+
+"main.help.trigger" = "%@ を長押ししてアプリスイッチャーを開く";
+"main.help.hint" = "離すと閉じる | 文字 / Tab / Enter で切り替え";
+"main.permission.required" = "アクセシビリティの許可が必要です";
+"main.permission.details" = "システム設定のアクセシビリティで Orbit を有効にしてください";
+"main.permission.open_settings" = "システム設定を開く";
+"main.permission.check" = "許可を確認";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "外観";
+"settings.card_size" = "カードのサイズ";
+
+"cardSize.small" = "小";
+"cardSize.medium" = "中";
+"cardSize.large" = "大";
+"cardSize.extraLarge" = "特大";
+
+"settings.card_material" = "カードの材質";
+"cardMaterial.white" = "白";
+"cardMaterial.black" = "黒";
+"cardMaterial.system" = "システム";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "macOS の究極ランチャー。\n高速、ミニマル、強力。";
+"welcome.start" = "使い始める";

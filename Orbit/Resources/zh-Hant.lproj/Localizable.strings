@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "已啟用";
+"menu.permission.required" = "需要權限";
+"menu.help.trigger" = "長按 %@ 呼出切換器";
+"menu.accessibility.authorize" = "授權輔助功能...";
+"menu.settings" = "設定...";
+"menu.quit" = "退出 Orbit";
+
+"settings.title" = "設定";
+"settings.permission.granted" = "輔助功能權限已授予";
+"settings.permission.required" = "需要輔助功能權限";
+"settings.permission.authorize" = "授權";
+"settings.section.trigger" = "觸發設定";
+"settings.trigger.modifier" = "觸發鍵";
+"settings.trigger.threshold" = "長按閾值";
+"settings.long_press_value" = "%d 毫秒";
+"settings.section.launch" = "啟動";
+"settings.launch_at_login" = "開機自動啟動";
+"settings.launch_at_login.unsupported" = "開機自動啟動需要 macOS 13 或更高版本。";
+"settings.section.usage" = "使用說明";
+"settings.usage.line1" = "- 長按 %@ 呼出應用切換器";
+"settings.usage.line2" = "- 使用方向鍵或 Tab 選擇應用";
+"settings.usage.line3" = "- 按字母直接切換，或按 Enter / 點擊切換";
+"settings.usage.line4" = "- 鬆開修飾鍵關閉切換器";
+
+"main.help.trigger" = "長按 %@ 呼出應用切換器";
+"main.help.hint" = "鬆開關閉 | 字母 / Tab / Enter 切換";
+"main.permission.required" = "需要輔助功能權限";
+"main.permission.details" = "請在系統設定中啟用 Orbit 的輔助功能權限";
+"main.permission.open_settings" = "開啟系統設定";
+"main.permission.check" = "檢查權限";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "外觀";
+"settings.card_size" = "卡片大小";
+
+"cardSize.small" = "小";
+"cardSize.medium" = "中";
+"cardSize.large" = "大";
+"cardSize.extraLarge" = "超大";
+ 
+"settings.card_material" = "卡片材質";
+"cardMaterial.white" = "純白";
+"cardMaterial.black" = "純黑";
+"cardMaterial.system" = "跟隨系統";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "macOS 終極啟動器。\n快速、極簡、強大。";
+"welcome.start" = "開始使用";

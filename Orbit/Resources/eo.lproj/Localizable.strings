@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "Ebligita";
+"menu.permission.required" = "Permeso bezonata";
+"menu.help.trigger" = "Tenu %@ por malfermi la ŝaltilon";
+"menu.accessibility.authorize" = "Rajtigi alireblecon...";
+"menu.settings" = "Agordoj...";
+"menu.quit" = "Eliri el Orbit";
+
+"settings.title" = "Agordoj";
+"settings.permission.granted" = "Alirebleca permeso donita";
+"settings.permission.required" = "Alirebleca permeso bezonata";
+"settings.permission.authorize" = "Rajtigi";
+"settings.section.trigger" = "Ekigilo";
+"settings.trigger.modifier" = "Ekigila klavo";
+"settings.trigger.threshold" = "Sojlo de longa premo";
+"settings.long_press_value" = "%d ms";
+"settings.section.launch" = "Lanĉo";
+"settings.launch_at_login" = "Lanĉi ĉe ensaluto";
+"settings.launch_at_login.unsupported" = "Lanĉo ĉe ensaluto bezonas macOS 13 aŭ pli nova.";
+"settings.section.usage" = "Uzo";
+"settings.usage.line1" = "- Tenu %@ por malfermi la ŝaltilon";
+"settings.usage.line2" = "- Uzu sagoklavojn aŭ Tab por elekti aplikaĵojn";
+"settings.usage.line3" = "- Tajpu literon, aŭ premu Enter / alklaku por lanĉi";
+"settings.usage.line4" = "- Liberigu la modifklavon por fermi";
+
+"main.help.trigger" = "Tenu %@ por malfermi la aplikaĵan ŝaltilon";
+"main.help.hint" = "Liberigu por fermi | Literoj / Tab / Enter por ŝanĝi";
+"main.permission.required" = "Alirebleca permeso bezonata";
+"main.permission.details" = "Ebligu Orbit en la alireblecaj agordoj";
+"main.permission.open_settings" = "Malfermi Sistemajn Agordojn";
+"main.permission.check" = "Kontroli permeson";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "Aspekto";
+"settings.card_size" = "Grandeco de kartoj";
+
+"cardSize.small" = "Malgranda";
+"cardSize.medium" = "Meza";
+"cardSize.large" = "Granda";
+"cardSize.extraLarge" = "Tre granda";
+
+"settings.card_material" = "Materialo de kartoj";
+"cardMaterial.white" = "Blanka";
+"cardMaterial.black" = "Nigra";
+"cardMaterial.system" = "Sistemo";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "La finfina lanĉilo por macOS.\nRapida, minimuma kaj potenca.";
+"welcome.start" = "Ekuzu";

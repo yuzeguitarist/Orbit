@@ -1,0 +1,52 @@
+"menu.permission.enabled" = "Aktiviert";
+"menu.permission.required" = "Berechtigung erforderlich";
+"menu.help.trigger" = "Halten Sie %@ gedrückt, um den Umschalter zu öffnen";
+"menu.accessibility.authorize" = "Bedienungshilfen erlauben...";
+"menu.settings" = "Einstellungen...";
+"menu.quit" = "Orbit beenden";
+
+"settings.title" = "Einstellungen";
+"settings.permission.granted" = "Bedienungshilfen-Berechtigung erteilt";
+"settings.permission.required" = "Bedienungshilfen-Berechtigung erforderlich";
+"settings.permission.authorize" = "Erlauben";
+"settings.section.trigger" = "Auslöser";
+"settings.trigger.modifier" = "Auslösetaste";
+"settings.trigger.threshold" = "Schwelle für langes Drücken";
+"settings.long_press_value" = "%d ms";
+"settings.section.launch" = "Start";
+"settings.launch_at_login" = "Beim Login starten";
+"settings.launch_at_login.unsupported" = "Start beim Login erfordert macOS 13 oder neuer.";
+"settings.section.usage" = "Verwendung";
+"settings.usage.line1" = "- Halten Sie %@ gedrückt, um den Umschalter zu öffnen";
+"settings.usage.line2" = "- Verwenden Sie die Pfeiltasten oder Tab, um Apps auszuwählen";
+"settings.usage.line3" = "- Tippen Sie einen Buchstaben oder drücken Sie Enter / klicken Sie zum Starten";
+"settings.usage.line4" = "- Lassen Sie die Modifikatortaste los, um zu schließen";
+
+"main.help.trigger" = "Halten Sie %@ gedrückt, um den App-Umschalter zu öffnen";
+"main.help.hint" = "Loslassen zum Schließen | Buchstaben / Tab / Enter zum Wechseln";
+"main.permission.required" = "Bedienungshilfen-Berechtigung erforderlich";
+"main.permission.details" = "Aktivieren Sie Orbit in den Bedienungshilfen-Einstellungen";
+"main.permission.open_settings" = "Systemeinstellungen öffnen";
+"main.permission.check" = "Berechtigung prüfen";
+
+"modifier.option" = "Option";
+"modifier.command" = "Command";
+"modifier.control" = "Control";
+"modifier.shift" = "Shift";
+
+"settings.section.appearance" = "Erscheinungsbild";
+"settings.card_size" = "Kartengröße";
+
+"cardSize.small" = "Klein";
+"cardSize.medium" = "Mittel";
+"cardSize.large" = "Groß";
+"cardSize.extraLarge" = "Sehr groß";
+
+"settings.card_material" = "Kartenmaterial";
+"cardMaterial.white" = "Weiß";
+"cardMaterial.black" = "Schwarz";
+"cardMaterial.system" = "System";
+
+"welcome.title" = "Orbit";
+"welcome.description" = "Der ultimative Launcher für macOS.\nSchnell, minimal und leistungsstark.";
+"welcome.start" = "Starten";
