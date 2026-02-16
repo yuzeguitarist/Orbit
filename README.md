@@ -201,7 +201,7 @@ brew install --cask orbit
 </p>
 
 <p align="center">
-  <img src="photos/buy_me_a_coffee.jpg" alt="微信/支付宝赞助收款码" width="320">
+  <img src="photos/buy_me_a_coffee.jpg" alt="微信/支付宝赞助收款码" width="420">
 </p>
 
 <p align="center">
