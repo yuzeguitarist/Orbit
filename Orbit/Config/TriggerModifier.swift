@@ -12,6 +12,7 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
     case command
     case control
     case shift
+    case disabled
 
     var id: String { rawValue }
 
@@ -25,6 +26,8 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return "⌃"
         case .shift:
             return "⇧"
+        case .disabled:
+            return "—"
         }
     }
 
@@ -38,6 +41,8 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return NSLocalizedString("modifier.control", comment: "")
         case .shift:
             return NSLocalizedString("modifier.shift", comment: "")
+        case .disabled:
+            return NSLocalizedString("modifier.disabled", comment: "")
         }
     }
 
@@ -51,14 +56,24 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return .maskControl
         case .shift:
             return .maskShift
+        case .disabled:
+            return []
         }
     }
 
     func isPressed(in flags: CGEventFlags) -> Bool {
-        flags.contains(cgFlag)
+        switch self {
+        case .disabled:
+            return false
+        default:
+            return flags.contains(cgFlag)
+        }
     }
 
     func otherModifiersPressed(in flags: CGEventFlags) -> Bool {
+        if self == .disabled {
+            return false
+        }
         let isShift = flags.contains(.maskShift)
         let isControl = flags.contains(.maskControl)
         let isOption = flags.contains(.maskAlternate)
@@ -73,6 +88,8 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return isShift || isOption || isCommand
         case .shift:
             return isControl || isOption || isCommand
+        case .disabled:
+            return false
         }
     }
 }
