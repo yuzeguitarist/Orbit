@@ -126,17 +126,17 @@ Because the app is not signed or notarized, Gatekeeper will warn. Follow these s
 Issues and PRs are welcome. Please keep PRs focused and describe the behavior clearly.
 
 ## License
-This project is partially open-sourced under **GPL-3.0 + Commons Clause**.
-See `LICENSE` for details.
 
-In short:
-- Free for personal and non-commercial use.
-- You may study and modify the open-sourced portions.
-- Derivative works must use the same license.
-- No selling or commercial use without permission.
-- Core/pro features are not included in this repository.
+This project is **source-available** and **All Rights Reserved** — see [LICENSE](LICENSE).
 
-For commercial licensing, contact: yuzeguitar@gmail.com
+### Usage and Rights
+
+- The source code is published for viewing and reference only.
+- No permission is granted to use, modify, redistribute, or commercialize the source code.
+- Use of the official compiled Orbit app released by the author is allowed.
+- Feedback and bug reports are welcome through Issues; pull requests are not accepted.
+
+Questions or licensing inquiries → orbit@deckclip.app
 
 ## 中文说明
 Orbit 是一款原生的菜单栏效率工具：长按修饰键即可在鼠标附近展开应用环，
@@ -219,16 +219,17 @@ brew install --cask orbit
 </p>
 
 ## 许可证
-本项目为 **部分开源**，采用 **GPL-3.0 + Commons Clause** 许可证 - 详见 `LICENSE`。
 
-简单来说:
-- 个人/非商业免费使用。
-- 可学习与修改开源部分。
-- 衍生作品需以相同许可证开源。
-- 未经许可不得销售或商业使用。
-- 核心/专业版功能未包含在本仓库。
+本项目为**源码可见**，并且 **保留所有权利（All Rights Reserved）** — 详见 [LICENSE](LICENSE)。
 
-商业授权请联系: yuzeguitar@gmail.com
+### 使用与权利说明
+
+- 本仓库公开源码，仅供查看与参考。
+- 未经作者书面许可，不授予对源码的使用、修改、再分发或商业化权利。
+- 你可以使用作者发布的官方编译版 Orbit App。
+- 欢迎通过 Issue 提交反馈或问题报告，但本仓库不接受 Pull Request。
+
+如有疑问或授权需求，请联系：orbit@deckclip.app
 
 ## 支持
 - 报告 Bug: https://github.com/yuzeguitarist/Orbit/issues/new?template=bug_report.md
