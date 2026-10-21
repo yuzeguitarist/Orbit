@@ -48,25 +48,15 @@ brew install --cask orbit
 The source is partially published; a full build from source is not supported yet.
 Please use the packaged `.dmg` for now.
 
-### Install on macOS without a paid developer account
-Because the app is not signed or notarized, Gatekeeper will warn. Follow these steps:
-
+### Install
 1) Download the latest `.dmg` from Releases.
-2) Open the DMG and drag `Orbit.app` to Applications (or the Applications link in the DMG).
-3) First launch (bypass Gatekeeper): in Applications, Control+Click (or right-click)
-   Orbit -> Open, confirm the warning and click "Open". If blocked, go to
-   System Settings -> Privacy & Security and click "Allow Anyway" / "Open Anyway",
-   then open once more.
+2) Open the DMG and drag `Orbit.app` to Applications.
+3) Open Orbit. It is signed with a Developer ID and notarized by Apple, so it opens normally.
 4) Permissions: grant Accessibility (and Input Monitoring if prompted) in
    System Settings -> Privacy & Security so global hotkeys work. Restart Orbit after granting.
-5) Updates: for each new DMG, drag to Applications to replace. If Gatekeeper warns again,
-   repeat step 3.
-6) Remove quarantine if you see "file is damaged":
-   ```bash
-   sudo xattr -r -d com.apple.quarantine /Applications/Orbit.app
-   ```
-   then Control+Click -> Open once.
-7) Uninstall: quit Orbit, delete `Applications/Orbit.app`. To erase data, delete
+5) Updating from 1.6 or earlier: Orbit now uses a new signature. In System Settings ->
+   Privacy & Security -> Accessibility, remove the old Orbit entry with "-", then add Orbit again.
+6) Uninstall: quit Orbit, delete `Applications/Orbit.app`. To erase data, delete
    `~/Library/Containers/com.yuzeguitar.Orbit` and `~/Library/Preferences/com.yuzeguitar.Orbit.plist`.
 
 ## Requirements
@@ -162,23 +152,15 @@ brew install --cask orbit
 ### 源码
 源码仅部分公开，暂不支持完整源码构建，请优先使用 `.dmg` 安装包。
 
-### 没有开发者账号时的安装方法
-由于应用未签名/未公证，Gatekeeper 会提示风险，可按以下步骤操作:
-
+### 安装
 1) 从 Releases 下载最新 `.dmg`。
-2) 打开 DMG，将 `Orbit.app` 拖入 Applications (或 DMG 内的 Applications 链接)。
-3) 首次运行: 在 Applications 中 Control+Click (或右键) Orbit -> Open，确认警告并点击 "Open"。
-   如仍被拦截，进入 System Settings -> Privacy & Security 点击 "Allow Anyway" / "Open Anyway",
-   然后再次打开。
+2) 打开 DMG，将 `Orbit.app` 拖入 Applications。
+3) 打开 Orbit。应用已使用 Developer ID 签名并通过 Apple 公证，可以直接打开。
 4) 权限: 在 System Settings -> Privacy & Security 授予 Accessibility
    (如提示 Input Monitoring 也请授权)，授权后重启 Orbit。
-5) 更新: 下载新 DMG 后拖入 Applications 覆盖即可，如再次提示按步骤 3 处理。
-6) 若提示 "file is damaged"，可移除隔离属性:
-   ```bash
-   sudo xattr -r -d com.apple.quarantine /Applications/Orbit.app
-   ```
-   然后 Control+Click -> Open 一次。
-7) 卸载: 退出 Orbit，删除 `Applications/Orbit.app`。如需清除数据，删除
+5) 从 1.6 或更早版本升级: Orbit 使用了新的签名，请在 System Settings -> Privacy & Security ->
+   Accessibility 中用 "-" 删除旧的 Orbit，再重新添加。
+6) 卸载: 退出 Orbit，删除 `Applications/Orbit.app`。如需清除数据，删除
    `~/Library/Containers/com.yuzeguitar.Orbit` 和 `~/Library/Preferences/com.yuzeguitar.Orbit.plist`。
 
 ### 运行要求
