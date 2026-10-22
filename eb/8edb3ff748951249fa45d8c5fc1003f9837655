@@ -1,0 +1,115 @@
+.gitignore
+  s_bc9ccd4e12b5a9::t_ccc0957361a69e 56-57
+Orbit/Services/OrbitBridgeClient.swift
+  s_bc9ccd4e12b5a9::t_3b469864f742c2 1-220
+LICENSE
+  s_bc9ccd4e12b5a9::t_ccc0957361a69e 1,3,5,7,9,11,13-73
+NOTICE
+  s_bc9ccd4e12b5a9::t_ccc0957361a69e 1-6
+README.md
+  s_bc9ccd4e12b5a9::t_ccc0957361a69e 48-49,117,121,123-126,152,204,206-209
+Orbit.xcodeproj/project.pbxproj
+  s_bc9ccd4e12b5a9::t_1e672adb306afd 317,381,411,423-424,432,447,459-460,468,480,501,521,540
+Orbit/Assets.xcassets/AccentColor.colorset/Contents.json
+  s_bc9ccd4e12b5a9::t_63aff648cb5e2f 1-11
+Orbit/Assets.xcassets/AppIcon.appiconset/Contents.json
+  s_bc9ccd4e12b5a9::t_9ec0b02b1a08a0 1-68
+Orbit/Assets.xcassets/Contents.json
+  s_bc9ccd4e12b5a9::t_dd1c65e22e6d52 1-6
+Orbit/Assets.xcassets/black_hole_texture.imageset/Contents.json
+  s_bc9ccd4e12b5a9::t_9d505654e49275 1-21
+Orbit/Config/OrbitConfig.swift
+  s_bc9ccd4e12b5a9::t_c2c5c3776ecd93 1-461
+Orbit/Config/TriggerModifier.swift
+  s_bc9ccd4e12b5a9::t_788d51c66f9044 76,78,80
+Orbit/Effects/PixelDissolveEffect.swift
+  s_bc9ccd4e12b5a9::t_6a34483235332d 35,37-73,76-78
+Orbit/Models/AppInfo.swift
+  s_bc9ccd4e12b5a9::t_627f50832e4e8b 18-25
+Orbit/Models/DragState.swift
+  s_bc9ccd4e12b5a9::t_abb435bd6cc573 33-44,55-73
+Orbit/Models/OrbitClipboardModels.swift
+  s_bc9ccd4e12b5a9::t_13bb650a8b6652 1-124
+Orbit/OrbitApp.swift
+  s_bc9ccd4e12b5a9::t_f9d9ff0aa719a3 75-78,104-107,164-165,167,171,176-180,223,226-229,258-260,272-273,280-292,306,313-344,364,380-384,391-398
+Orbit/Resources/da.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_9cebd330271c2d 15,47-51,55,60-75
+Orbit/Resources/de.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_3cfc509ccb1baf 15,47-51,55,60-75
+Orbit/Resources/en.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_52c8578e50884d 15,47-51,55,60-76
+Orbit/Resources/eo.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_5816e2a5733b9a 15,47-51,55,60-75
+Orbit/Resources/fr.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_6e564e8f9b19b8 15,47-51,55,60-75
+Orbit/Resources/ja.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_2d9e87b7f74409 15,47-51,55,60-75
+Orbit/Resources/ko.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_ebaec653e09c23 15,47-51,55,60-75
+Orbit/Resources/nb.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_d838e9a2c7bdb7 15,47-51,55,60-75
+Orbit/Resources/ru.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_c1dc90a67f66e0 15,47-51,55,60-75
+Orbit/Resources/zh-Hans.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_12e6c6c391313d 15,47-51,55,60-76
+Orbit/Resources/zh-Hant.lproj/Localizable.strings
+  s_bc9ccd4e12b5a9::t_617e93d11c463b 15,47-51,55,60-75
+Orbit/Services/AppListService.swift
+  s_bc9ccd4e12b5a9::t_0679de897d0dfb 15,18-23,56,60,70-118
+Orbit/Services/ClipboardShareService.swift
+  s_bc9ccd4e12b5a9::t_fbe57ecc591863 1-148
+Orbit/Services/FileDragDropService.swift
+  s_bc9ccd4e12b5a9::t_5aefa03adac52c 1-139
+Orbit/Services/HotKeyService.swift
+  s_bc9ccd4e12b5a9::t_6c66ec2324804d 1-391
+Orbit/Services/OrbitJumpModel.swift
+  s_bc9ccd4e12b5a9::t_e16455e6791434 1-187
+Orbit/ViewModels/ClipboardRingViewModel.swift
+  s_bc9ccd4e12b5a9::t_ed22c1fdec37f5 1-556
+Orbit/ViewModels/OrbitRingCoordinator.swift
+  s_bc9ccd4e12b5a9::t_2dfb40b09555fe 1-134
+Orbit/ViewModels/OrbitViewModel.swift
+  s_bc9ccd4e12b5a9::t_226aee6aa46c99 1-647
+Orbit/Views/AirDropIndicatorView.swift
+  s_bc9ccd4e12b5a9::t_eb1d728396553f 1-178
+Orbit/Views/AppCardView.swift
+  s_bc9ccd4e12b5a9::t_95afbf95f80210 1-427
+Orbit/Views/BlackHoleView.swift
+  s_bc9ccd4e12b5a9::t_b2fa6d0e9dcb22 1-82
+Orbit/Views/ClipboardCardView.swift
+  s_bc9ccd4e12b5a9::t_e230d01faab2a3 1-226
+Orbit/Views/ClipboardRingView.swift
+  s_bc9ccd4e12b5a9::t_774f05a0f5db60 1-119
+Orbit/Views/OrbitCardView.swift
+  s_bc9ccd4e12b5a9::t_fe9937428ae30c 1-378
+Orbit/Views/OrbitRingContainerView.swift
+  s_bc9ccd4e12b5a9::t_877c1e94ac5474 1-24
+Orbit/Views/OrbitRingView.swift
+  s_bc9ccd4e12b5a9::t_1093f03a34221e 1-125
+Orbit/Views/OrbitWindow.swift
+  s_bc9ccd4e12b5a9::t_2720de8e02c3ec 1-689
+Orbit/Views/WelcomeView.swift
+  s_bc9ccd4e12b5a9::t_2124add6c2e14e 1-79
+Orbit/Views/WelcomeWindowController.swift
+  s_bc9ccd4e12b5a9::t_f8bb25ba22aeaa 1-37
+OrbitTests/OrbitTests.swift
+  s_bc9ccd4e12b5a9::t_c069b940395ed6 9,18-35
+release.sh
+  s_bc9ccd4e12b5a9::t_2a9b38fa505f01 1-1046
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eb8edb3ff748951249fa45d8c5fc1003f9837655",
+  "prompts": {},
+  "sessions": {
+    "s_bc9ccd4e12b5a9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b8efb7-dce0-48c0-8eb7-2d2d1a32dcfe",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    }
+  }
+}
