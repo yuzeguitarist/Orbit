@@ -53,3 +53,5 @@ Packages/
 **/Secrets.plist
 **/Secret.plist
 **/Secrets.*
+xcuserdata/
+build_packaging/

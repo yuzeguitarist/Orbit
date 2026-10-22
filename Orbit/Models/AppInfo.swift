@@ -12,9 +12,16 @@ import Foundation
 struct AppInfo: Identifiable, Equatable {
     let id: String
     let name: String
-    let icon: NSImage
     let bundleURL: URL?
     let processIdentifier: pid_t
+
+    var icon: NSImage {
+        AppListService.shared.icon(
+            forAppId: id,
+            processIdentifier: processIdentifier,
+            bundleURL: bundleURL
+        )
+    }
 
     /// 获取应用名称的首字母
     var firstLetter: Character? {

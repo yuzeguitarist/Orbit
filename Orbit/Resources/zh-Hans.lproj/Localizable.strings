@@ -12,6 +12,7 @@
 "settings.section.trigger" = "触发设置";
 "settings.trigger.modifier" = "触发键";
 "settings.trigger.threshold" = "长按阈值";
+"settings.trigger.cmdtab" = "启用 Cmd+Tab 快捷键";
 "settings.long_press_value" = "%d 毫秒";
 "settings.section.launch" = "启动";
 "settings.launch_at_login" = "开机自动启动";
@@ -43,10 +44,33 @@
 "cardSize.extraLarge" = "超大";
  
 "settings.card_material" = "卡片材质";
+"settings.clipboard_liquid_glass" = "剪贴板环使用液态玻璃";
+"settings.ring_centered" = "圆环始终显示在屏幕中心";
+"settings.ring_icons_upright" = "图标与文字始终朝上";
+"settings.ring_animation_speed" = "圆环动画速度";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "纯白";
 "cardMaterial.black" = "纯黑";
 "cardMaterial.system" = "跟随系统";
+"cardMaterial.liquidGlass" = "液态玻璃";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "macOS 终极启动器。\n快速、极简、强大。";
 "welcome.start" = "开始使用";
+
+"menu.help.trigger.custom" = "按下 %@ 呼出切换器";
+"menu.help.trigger.disabled" = "在设置中配置触发方式";
+"main.help.trigger.custom" = "按下 %@ 呼出应用切换器";
+"main.help.trigger.disabled" = "在设置中配置触发方式";
+"settings.usage.line1.custom" = "- 按下 %@ 呼出应用切换器";
+"settings.usage.line1.disabled" = "- 在设置中配置触发方式";
+"settings.trigger.shortcut" = "自定义快捷键";
+"settings.trigger.shortcut.none" = "未设置";
+"settings.trigger.shortcut.record" = "开始录入";
+"settings.trigger.shortcut.recording" = "录入中...";
+"settings.trigger.shortcut.clear" = "清除";
+"settings.trigger.shortcut.hint" = "按下包含修饰键的快捷键，Esc 取消。";
+"settings.trigger.shortcut.recording_hint" = "请按下你的快捷键。";
+"settings.trigger.shift_toggle_hint" = "使用 Shift 在应用环与剪贴板环之间切换。";
+"settings.trigger.shortcut.needs_modifier" = "快捷键需包含至少一个修饰键。";
+"modifier.disabled" = "关闭";

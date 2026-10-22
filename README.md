@@ -45,8 +45,8 @@ brew install --cask orbit
 ```
 
 ### Source
-The source is partially published; a full build from source is not supported yet.
-Please use the packaged `.dmg` for now.
+The full source is in this repository; open `Orbit.xcodeproj` in Xcode to build.
+Or use the packaged `.dmg` from Releases.
 
 ### Install
 1) Download the latest `.dmg` from Releases.
@@ -114,17 +114,16 @@ Please use the packaged `.dmg` for now.
 
 ## Contributing
 Issues and PRs are welcome. Please keep PRs focused and describe the behavior clearly.
+By submitting a PR you agree your contribution is licensed under the same terms as this project.
 
 ## License
 
-This project is **source-available** and **All Rights Reserved** — see [LICENSE](LICENSE).
+Orbit is licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE).
 
-### Usage and Rights
-
-- The source code is published for viewing and reference only.
-- No permission is granted to use, modify, redistribute, or commercialize the source code.
-- Use of the official compiled Orbit app released by the author is allowed.
-- Feedback and bug reports are welcome through Issues; pull requests are not accepted.
+- You may use, copy, modify and share the source for any **noncommercial** purpose (personal use, study, research, hobby projects, nonprofits).
+- You may **not** sell it or use it, or anything derived from it, for commercial purposes.
+- **Attribution is required**: keep the [NOTICE](NOTICE) file (copyright line) with any copy or derivative, and state that your work is based on Orbit by Yuze Pan.
+- Issues and pull requests are welcome.
 
 Questions or licensing inquiries → orbit@deckclip.app
 
@@ -150,7 +149,7 @@ brew install --cask orbit
 ```
 
 ### 源码
-源码仅部分公开，暂不支持完整源码构建，请优先使用 `.dmg` 安装包。
+完整源码已公开，用 Xcode 打开 `Orbit.xcodeproj` 即可构建，也可直接使用 Releases 里的 `.dmg`。
 
 ### 安装
 1) 从 Releases 下载最新 `.dmg`。
@@ -202,14 +201,12 @@ brew install --cask orbit
 
 ## 许可证
 
-本项目为**源码可见**，并且 **保留所有权利（All Rights Reserved）** — 详见 [LICENSE](LICENSE)。
+本项目采用 [PolyForm Noncommercial License 1.0.0](LICENSE) 授权。
 
-### 使用与权利说明
-
-- 本仓库公开源码，仅供查看与参考。
-- 未经作者书面许可，不授予对源码的使用、修改、再分发或商业化权利。
-- 你可以使用作者发布的官方编译版 Orbit App。
-- 欢迎通过 Issue 提交反馈或问题报告，但本仓库不接受 Pull Request。
+- 可用于任何**非商业**目的：个人使用、学习、研究、兴趣项目、非营利组织，可复制、修改和分享。
+- **禁止**商业用途：不得出售，或将其及衍生作品用于商业目的。
+- **必须署名**：任何副本或衍生作品需保留 [NOTICE](NOTICE) 中的版权声明，并注明基于 Yuze Pan 的 Orbit。
+- 欢迎提交 Issue 和 Pull Request。
 
 如有疑问或授权需求，请联系：orbit@deckclip.app
 

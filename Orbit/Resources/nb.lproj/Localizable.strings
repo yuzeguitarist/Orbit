@@ -12,6 +12,7 @@
 "settings.section.trigger" = "Utløser";
 "settings.trigger.modifier" = "Utløsertast";
 "settings.trigger.threshold" = "Terskel for langt trykk";
+"settings.trigger.cmdtab" = "Aktiver Cmd+Tab-snarvei";
 "settings.long_press_value" = "%d ms";
 "settings.section.launch" = "Oppstart";
 "settings.launch_at_login" = "Start ved innlogging";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "Ekstra stor";
 
 "settings.card_material" = "Kortmateriale";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "Vis alltid ringen i midten av skjermen";
+"settings.ring_icons_upright" = "Hold ikoner og tekst oppreist";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "Hvit";
 "cardMaterial.black" = "Svart";
 "cardMaterial.system" = "System";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "Den ultimate starteren for macOS.\nRask, minimal og kraftig.";
 "welcome.start" = "Kom i gang";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

@@ -30,6 +30,18 @@ enum CardDragState: Equatable {
         }
     }
 
+    /// 检查是否是 releasedInBlackHole 状态（忽略 offset 值）
+    var isReleasedInBlackHole: Bool {
+        if case .releasedInBlackHole = self { return true }
+        return false
+    }
+
+    /// 检查是否是 dissolving 状态（忽略 offset 值）
+    var isDissolving: Bool {
+        if case .dissolving = self { return true }
+        return false
+    }
+
     /// 获取当前偏移量
     var offset: CGSize {
         switch self {
@@ -38,6 +50,25 @@ enum CardDragState: Equatable {
             return offset
         default:
             return .zero
+        }
+    }
+
+    /// 高频拖拽会在一帧内产生大量 sub-pixel offset 更新。
+    /// 对拖拽中的连续 offset 做轻量去抖，避免整圈 SwiftUI ForEach 被无意义刷新。
+    nonisolated func isEquivalentForRendering(to other: CardDragState, movementThreshold: CGFloat = 0.5) -> Bool {
+        switch (self, other) {
+        case (.idle, .idle):
+            return true
+        case (.dragging(let lhs), .dragging(let rhs)),
+             (.nearBlackHole(let lhs), .nearBlackHole(let rhs)):
+            return abs(lhs.width - rhs.width) < movementThreshold
+                && abs(lhs.height - rhs.height) < movementThreshold
+        case (.releasedInBlackHole(let lhs), .releasedInBlackHole(let rhs)),
+             (.dissolving(let lhs), .dissolving(let rhs)):
+            // 释放和消散需要保留精确落点，不能按阈值吞掉。
+            return lhs == rhs
+        default:
+            return false
         }
     }
 }

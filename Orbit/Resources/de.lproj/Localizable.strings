@@ -12,6 +12,7 @@
 "settings.section.trigger" = "Auslöser";
 "settings.trigger.modifier" = "Auslösetaste";
 "settings.trigger.threshold" = "Schwelle für langes Drücken";
+"settings.trigger.cmdtab" = "Cmd+Tab-Kurzbefehl aktivieren";
 "settings.long_press_value" = "%d ms";
 "settings.section.launch" = "Start";
 "settings.launch_at_login" = "Beim Login starten";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "Sehr groß";
 
 "settings.card_material" = "Kartenmaterial";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "Ring immer in der Bildschirmmitte anzeigen";
+"settings.ring_icons_upright" = "Symbole und Text aufrecht halten";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "Weiß";
 "cardMaterial.black" = "Schwarz";
 "cardMaterial.system" = "System";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "Der ultimative Launcher für macOS.\nSchnell, minimal und leistungsstark.";
 "welcome.start" = "Starten";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

@@ -5,7 +5,6 @@
 //  Created by Claude on 1/8/26.
 //
 
-import Combine
 import SwiftUI
 
 /// 像素化消散效果（Thanos snap 风格）
@@ -33,54 +32,50 @@ struct PixelDissolveModifier: ViewModifier {
         let size: CGFloat
     }
 
+    @ViewBuilder
     func body(content: Content) -> some View {
-        content
-            .opacity(progress < 0.1 ? 1 : max(0, 1 - progress * 1.2))
-// 粒子特效在背景中显示，避免遮挡卡片内容
-            .background(
-                GeometryReader { geo in
-                    Canvas { context, size in
-                        guard progress > 0.05 else { return }
+        if progress <= 0.001 {
+            content
+        } else {
+            content
+                .opacity(progress < 0.1 ? 1 : max(0, 1 - progress * 1.2))
+                .background(
+                    GeometryReader { geo in
+                        Canvas { context, size in
+                            guard progress > 0.05 else { return }
 
-                        for seed in particleSeeds {
-                            // 计算粒子当前位置
-                            let adjustedProgress = max(0, (progress - seed.delay) / (1 - seed.delay))
-                            guard adjustedProgress > 0 else { continue }
+                            for seed in particleSeeds {
+                                let adjustedProgress = max(0, (progress - seed.delay) / (1 - seed.delay))
+                                guard adjustedProgress > 0 else { continue }
 
-                            // 粒子向黑洞方向移动
-                            let moveDistance = seed.speed * CGFloat(adjustedProgress) * 100
-                            let currentX = seed.startX + cos(seed.angle) * moveDistance
-                            let currentY = seed.startY + sin(seed.angle) * moveDistance
+                                let moveDistance = seed.speed * CGFloat(adjustedProgress) * 100
+                                let currentX = seed.startX + cos(seed.angle) * moveDistance
+                                let currentY = seed.startY + sin(seed.angle) * moveDistance
 
-                            // 粒子透明度随进度降低
-                            let alpha = max(0, 1 - adjustedProgress * 1.5)
+                                let alpha = max(0, 1 - adjustedProgress * 1.5)
+                                let currentSize = seed.size * CGFloat(1 - adjustedProgress * 0.5)
+                                let rect = CGRect(
+                                    x: currentX - currentSize / 2,
+                                    y: currentY - currentSize / 2,
+                                    width: currentSize,
+                                    height: currentSize
+                                )
 
-                            // 粒子大小随进度缩小
-                            let currentSize = seed.size * CGFloat(1 - adjustedProgress * 0.5)
-
-                            // 绘制粒子
-                            let rect = CGRect(
-                                x: currentX - currentSize / 2,
-                                y: currentY - currentSize / 2,
-                                width: currentSize,
-                                height: currentSize
-                            )
-
-                            context.opacity = alpha
-                            // 使用金橙色粒子
-                            let particleColor = Color(red: 1.0, green: 0.75 + Double(seed.id % 10) * 0.02, blue: 0.3)
-                            context.fill(
-                                Path(ellipseIn: rect),
-                                with: .color(particleColor.opacity(0.9))
-                            )
+                                context.opacity = alpha
+                                let particleColor = Color(red: 1.0, green: 0.75 + Double(seed.id % 10) * 0.02, blue: 0.3)
+                                context.fill(
+                                    Path(ellipseIn: rect),
+                                    with: .color(particleColor.opacity(0.9))
+                                )
+                            }
+                        }
+                        .onAppear {
+                            generateParticles(in: geo.size)
                         }
                     }
-                    .onAppear {
-                        generateParticles(in: geo.size)
-                    }
-                }
-            )
-            .blur(radius: progress * 2)
+                )
+                .blur(radius: progress * 2)
+        }
     }
 
     private func generateParticles(in size: CGSize) {
@@ -123,48 +118,6 @@ extension View {
     ///   - blackHoleDirection: 黑洞方向（弧度）
     func pixelDissolve(progress: Double, blackHoleDirection: Double = .pi / 2) -> some View {
         modifier(PixelDissolveModifier(progress: progress, blackHoleDirection: blackHoleDirection))
-    }
-}
-
-/// 消散动画控制器
-class DissolveAnimationController: ObservableObject {
-    @Published var progress: Double = 0
-
-    private var displayLink: CVDisplayLink?
-    private var startTime: CFTimeInterval = 0
-    private var duration: TimeInterval = OrbitConfig.dissolveDuration
-
-    func startDissolve(duration: TimeInterval = OrbitConfig.dissolveDuration, completion: @escaping () -> Void) {
-        self.duration = duration
-        progress = 0
-
-        // 使用 Timer 实现动画（SwiftUI 友好）
-        let startTime = CACurrentMediaTime()
-
-        Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { [weak self] timer in
-            guard let self = self else {
-                timer.invalidate()
-                return
-            }
-
-            let elapsed = CACurrentMediaTime() - startTime
-            let newProgress = min(1.0, elapsed / self.duration)
-
-            DispatchQueue.main.async {
-                self.progress = newProgress
-            }
-
-            if newProgress >= 1.0 {
-                timer.invalidate()
-                DispatchQueue.main.async {
-                    completion()
-                }
-            }
-        }
-    }
-
-    func reset() {
-        progress = 0
     }
 }
 

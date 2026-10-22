@@ -12,6 +12,7 @@
 "settings.section.trigger" = "Déclencheur";
 "settings.trigger.modifier" = "Touche de déclenchement";
 "settings.trigger.threshold" = "Seuil d'appui long";
+"settings.trigger.cmdtab" = "Activer le raccourci Cmd+Tab";
 "settings.long_press_value" = "%d ms";
 "settings.section.launch" = "Démarrage";
 "settings.launch_at_login" = "Lancer à l'ouverture de session";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "Très grande";
 
 "settings.card_material" = "Matériau des cartes";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "Toujours afficher l'anneau au centre de l'écran";
+"settings.ring_icons_upright" = "Garder les icônes et le texte droits";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "Blanc";
 "cardMaterial.black" = "Noir";
 "cardMaterial.system" = "Système";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "Le lanceur ultime pour macOS.\nRapide, minimal et puissant.";
 "welcome.start" = "Commencer";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

@@ -12,6 +12,7 @@
 "settings.section.trigger" = "Ekigilo";
 "settings.trigger.modifier" = "Ekigila klavo";
 "settings.trigger.threshold" = "Sojlo de longa premo";
+"settings.trigger.cmdtab" = "Aktivigi Cmd+Tab-ŝparvojon";
 "settings.long_press_value" = "%d ms";
 "settings.section.launch" = "Lanĉo";
 "settings.launch_at_login" = "Lanĉi ĉe ensaluto";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "Tre granda";
 
 "settings.card_material" = "Materialo de kartoj";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "Ĉiam montri ringon ĉe la centro de la ekrano";
+"settings.ring_icons_upright" = "Tenu ikonojn kaj tekston rektaj";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "Blanka";
 "cardMaterial.black" = "Nigra";
 "cardMaterial.system" = "Sistemo";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "La finfina lanĉilo por macOS.\nRapida, minimuma kaj potenca.";
 "welcome.start" = "Ekuzu";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

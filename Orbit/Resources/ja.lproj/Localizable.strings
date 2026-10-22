@@ -12,6 +12,7 @@
 "settings.section.trigger" = "トリガー";
 "settings.trigger.modifier" = "トリガーキー";
 "settings.trigger.threshold" = "長押しのしきい値";
+"settings.trigger.cmdtab" = "Cmd+Tab ショートカットを有効化";
 "settings.long_press_value" = "%d ミリ秒";
 "settings.section.launch" = "起動";
 "settings.launch_at_login" = "ログイン時に起動";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "特大";
 
 "settings.card_material" = "カードの材質";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "リングを常に画面中央に表示";
+"settings.ring_icons_upright" = "アイコンとテキストを常に上向きにする";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "白";
 "cardMaterial.black" = "黒";
 "cardMaterial.system" = "システム";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "macOS の究極ランチャー。\n高速、ミニマル、強力。";
 "welcome.start" = "使い始める";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

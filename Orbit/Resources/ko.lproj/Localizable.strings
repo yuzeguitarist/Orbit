@@ -12,6 +12,7 @@
 "settings.section.trigger" = "트리거";
 "settings.trigger.modifier" = "트리거 키";
 "settings.trigger.threshold" = "길게 누름 임계값";
+"settings.trigger.cmdtab" = "Cmd+Tab 바로가기 사용";
 "settings.long_press_value" = "%d ms";
 "settings.section.launch" = "시작";
 "settings.launch_at_login" = "로그인 시 시작";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "아주 크게";
 
 "settings.card_material" = "카드 재질";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "링을 항상 화면 중앙에 표시";
+"settings.ring_icons_upright" = "아이콘과 텍스트를 항상 똑바로 표시";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "흰색";
 "cardMaterial.black" = "검은색";
 "cardMaterial.system" = "시스템";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "macOS용 궁극의 런처.\n빠르고, 미니멀하며, 강력합니다.";
 "welcome.start" = "시작하기";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

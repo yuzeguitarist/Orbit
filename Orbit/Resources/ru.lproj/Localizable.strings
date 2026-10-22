@@ -12,6 +12,7 @@
 "settings.section.trigger" = "Триггер";
 "settings.trigger.modifier" = "Клавиша-триггер";
 "settings.trigger.threshold" = "Порог долгого нажатия";
+"settings.trigger.cmdtab" = "Включить сочетание Cmd+Tab";
 "settings.long_press_value" = "%d мс";
 "settings.section.launch" = "Запуск";
 "settings.launch_at_login" = "Запуск при входе";
@@ -43,10 +44,32 @@
 "cardSize.extraLarge" = "Очень большой";
 
 "settings.card_material" = "Материал карточек";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "Всегда показывать кольцо в центре экрана";
+"settings.ring_icons_upright" = "Оставлять значки и текст вертикальными";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "Белый";
 "cardMaterial.black" = "Черный";
 "cardMaterial.system" = "Системный";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "Идеальный лаунчер для macOS.\nБыстрый, минималистичный и мощный.";
 "welcome.start" = "Начать";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

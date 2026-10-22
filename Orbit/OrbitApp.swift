@@ -72,7 +72,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func statusItemClicked(_ sender: NSStatusBarButton) {
-        let event = NSApp.currentEvent!
+        guard let event = NSApp.currentEvent else {
+            showMenu()
+            return
+        }
 
         if event.type == .rightMouseUp {
             // 右键显示菜单
@@ -98,9 +101,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
 
         // 使用说明
-        let helpTitle = String(
-            format: NSLocalizedString("menu.help.trigger", comment: ""),
-            OrbitConfig.triggerModifier.symbol
+        let helpTitle = OrbitConfig.triggerHelpText(
+            longPressKey: "menu.help.trigger",
+            shortcutKey: "menu.help.trigger.custom",
+            disabledKey: "menu.help.trigger.disabled"
         )
         let helpItem = NSMenuItem(title: helpTitle, action: nil, keyEquivalent: "")
         helpItem.isEnabled = false
@@ -157,16 +161,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if let shouldShow = notification.userInfo?["show"] as? Bool {
                 if shouldShow {
                     let location = notification.userInfo?["location"] as? CGPoint ?? NSEvent.mouseLocation
+                    let trigger = notification.userInfo?["trigger"] as? String
+                    let autoSelectFirstApp = trigger == "cmdTab"
                     Task { @MainActor in
-                        OrbitWindowController.shared.show(at: location)
+                        OrbitWindowController.shared.show(at: location, autoSelectFirstApp: autoSelectFirstApp)
                     }
                 } else {
                     let shouldActivate = notification.userInfo?["activate"] as? Bool ?? false
+                    let dismissStyle = notification.userInfo?["dismissStyle"] as? String
                     Task { @MainActor in
                         if shouldActivate {
                             OrbitWindowController.shared.hide(activateSelected: true)
                         } else {
-                            OrbitWindowController.shared.dismissImmediately()
+                            if dismissStyle == "animated" || HotKeyService.shared.dismissStyle == .animated {
+                                OrbitWindowController.shared.dismissAnimated()
+                            } else {
+                                OrbitWindowController.shared.dismissImmediately()
+                            }
                         }
                     }
                 }
@@ -209,8 +220,13 @@ final class SettingsWindowController: NSWindowController {
 struct SettingsView: View {
     @State private var longPressThreshold: Double = OrbitConfig.longPressThreshold
     @State private var triggerModifier: TriggerModifier = OrbitConfig.triggerModifier
+    @State private var isCmdTabShortcutEnabled: Bool = OrbitConfig.isCmdTabShortcutEnabled
     @State private var cardSize: CardSize = OrbitConfig.cardSize
     @State private var cardMaterial: OrbitConfig.CardMaterial = OrbitConfig.cardMaterial
+    @State private var lockRingToScreenCenter: Bool = OrbitConfig.lockRingToScreenCenter
+    @State private var lockRingItemsUpright: Bool = OrbitConfig.lockRingItemsUpright
+    @State private var clipboardRingUsesLiquidGlass: Bool = OrbitConfig.clipboardRingUsesLiquidGlass
+    @State private var ringAnimationSpeed: Double = OrbitConfig.ringAnimationSpeed
     @State private var hasPermission = HotKeyService.checkAccessibilityPermission()
     @State private var launchAtLoginEnabled = false
     @State private var isLaunchAtLoginSupported = LaunchAtLoginManager.isSupported
@@ -239,6 +255,9 @@ struct SettingsView: View {
                         Text(modifier.localizedName).tag(modifier)
                     }
                 }
+                Text("settings.trigger.shift_toggle_hint")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
 
                 HStack {
                     Text("settings.trigger.threshold")
@@ -250,11 +269,26 @@ struct SettingsView: View {
                         .frame(width: 55)
                         .monospacedDigit()
                 }
+                .disabled(triggerModifier == .disabled)
+                .opacity(triggerModifier == .disabled ? 0.5 : 1)
                 .onChange(of: longPressThreshold) { _, newValue in
                     OrbitConfig.longPressThreshold = newValue
                 }
                 .onChange(of: triggerModifier) { _, newValue in
                     OrbitConfig.triggerModifier = newValue
+                }
+
+                Toggle(isOn: $isCmdTabShortcutEnabled) {
+                    HStack {
+                        Text("settings.trigger.cmdtab")
+                        Spacer()
+                        Text(OrbitConfig.cmdTabShortcut.displayString)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(isCmdTabShortcutEnabled ? .primary : .secondary)
+                    }
+                }
+                .onChange(of: isCmdTabShortcutEnabled) { _, newValue in
+                    OrbitConfig.isCmdTabShortcutEnabled = newValue
                 }
             }
 
@@ -269,12 +303,44 @@ struct SettingsView: View {
                 }
 
                 Picker("settings.card_material", selection: $cardMaterial) {
-                    ForEach(OrbitConfig.CardMaterial.allCases) { material in
+                    ForEach(OrbitConfig.availableCardMaterials) { material in
                         Text(material.localizedName).tag(material)
                     }
                 }
                 .onChange(of: cardMaterial) { _, newValue in
                     OrbitConfig.cardMaterial = newValue
+                }
+
+                if OrbitConfig.isLiquidGlassAvailable {
+                    Toggle("settings.clipboard_liquid_glass", isOn: $clipboardRingUsesLiquidGlass)
+                        .disabled(cardMaterial != .liquidGlass)
+                        .onChange(of: clipboardRingUsesLiquidGlass) { _, newValue in
+                            OrbitConfig.clipboardRingUsesLiquidGlass = newValue
+                        }
+                }
+
+                Toggle("settings.ring_centered", isOn: $lockRingToScreenCenter)
+                    .onChange(of: lockRingToScreenCenter) { _, newValue in
+                        OrbitConfig.lockRingToScreenCenter = newValue
+                    }
+
+                Toggle("settings.ring_icons_upright", isOn: $lockRingItemsUpright)
+                    .onChange(of: lockRingItemsUpright) { _, newValue in
+                        OrbitConfig.lockRingItemsUpright = newValue
+                    }
+
+                HStack {
+                    Text("settings.ring_animation_speed")
+                    Slider(value: $ringAnimationSpeed, in: 0.5 ... 2.0, step: 0.1)
+                    Text(String(
+                        format: NSLocalizedString("settings.ring_animation_speed_value", comment: ""),
+                        ringAnimationSpeed
+                    ))
+                        .frame(width: 50)
+                        .monospacedDigit()
+                }
+                .onChange(of: ringAnimationSpeed) { _, newValue in
+                    OrbitConfig.ringAnimationSpeed = newValue
                 }
             }
 
@@ -295,10 +361,7 @@ struct SettingsView: View {
             }
 
             Section("settings.section.usage") {
-                Text(String(
-                    format: NSLocalizedString("settings.usage.line1", comment: ""),
-                    triggerModifier.symbol
-                ))
+                Text(usageLine1)
                 Text("settings.usage.line2")
                 Text("settings.usage.line3")
                 Text("settings.usage.line4")
@@ -314,10 +377,23 @@ struct SettingsView: View {
             triggerModifier = OrbitConfig.triggerModifier
             cardSize = OrbitConfig.cardSize
             cardMaterial = OrbitConfig.cardMaterial
+            lockRingToScreenCenter = OrbitConfig.lockRingToScreenCenter
+            lockRingItemsUpright = OrbitConfig.lockRingItemsUpright
+            clipboardRingUsesLiquidGlass = OrbitConfig.clipboardRingUsesLiquidGlass
+            ringAnimationSpeed = OrbitConfig.ringAnimationSpeed
+            isCmdTabShortcutEnabled = OrbitConfig.isCmdTabShortcutEnabled
             isLaunchAtLoginSupported = LaunchAtLoginManager.isSupported
             if isLaunchAtLoginSupported {
                 launchAtLoginEnabled = LaunchAtLoginManager.refreshStatus()
             }
         }
+    }
+
+    private var usageLine1: String {
+        OrbitConfig.triggerHelpText(
+            longPressKey: "settings.usage.line1",
+            shortcutKey: "settings.usage.line1.custom",
+            disabledKey: "settings.usage.line1.disabled"
+        )
     }
 }

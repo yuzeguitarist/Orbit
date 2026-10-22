@@ -12,6 +12,7 @@
 "settings.section.trigger" = "Trigger";
 "settings.trigger.modifier" = "Trigger key";
 "settings.trigger.threshold" = "Long press threshold";
+"settings.trigger.cmdtab" = "Enable Cmd+Tab shortcut";
 "settings.long_press_value" = "%d ms";
 "settings.section.launch" = "Startup";
 "settings.launch_at_login" = "Launch at login";
@@ -43,10 +44,33 @@
 "cardSize.extraLarge" = "Extra Large";
  
 "settings.card_material" = "Card material";
+"settings.clipboard_liquid_glass" = "Liquid Glass for clipboard ring";
+"settings.ring_centered" = "Always show ring at screen center";
+"settings.ring_icons_upright" = "Keep icons and text upright";
+"settings.ring_animation_speed" = "Ring animation speed";
+"settings.ring_animation_speed_value" = "%.1fx";
 "cardMaterial.white" = "White";
 "cardMaterial.black" = "Black";
 "cardMaterial.system" = "System";
+"cardMaterial.liquidGlass" = "Liquid Glass";
 
 "welcome.title" = "Orbit";
 "welcome.description" = "The ultimate launcher for macOS.\nFast, minimal, and powerful.";
 "welcome.start" = "Start Using";
+
+"menu.help.trigger.custom" = "Press %@ to open the switcher";
+"menu.help.trigger.disabled" = "Set a trigger in Settings";
+"main.help.trigger.custom" = "Press %@ to open the app switcher";
+"main.help.trigger.disabled" = "Set a trigger in Settings";
+"settings.usage.line1.custom" = "- Press %@ to open the app switcher";
+"settings.usage.line1.disabled" = "- Set a trigger in Settings";
+"settings.trigger.shortcut" = "Custom shortcut";
+"settings.trigger.shortcut.none" = "Not set";
+"settings.trigger.shortcut.record" = "Record";
+"settings.trigger.shortcut.recording" = "Recording...";
+"settings.trigger.shortcut.clear" = "Clear";
+"settings.trigger.shortcut.hint" = "Press a shortcut with modifiers. Esc to cancel.";
+"settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
+"settings.trigger.shift_toggle_hint" = "Shift switches between app and clipboard rings.";
+"settings.trigger.shortcut.needs_modifier" = "Shortcut must include at least one modifier.";
+"modifier.disabled" = "Disabled";

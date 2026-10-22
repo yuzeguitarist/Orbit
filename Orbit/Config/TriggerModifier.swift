@@ -11,7 +11,6 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
     case option
     case command
     case control
-    case shift
     case disabled
 
     var id: String { rawValue }
@@ -24,8 +23,6 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return "⌘"
         case .control:
             return "⌃"
-        case .shift:
-            return "⇧"
         case .disabled:
             return "—"
         }
@@ -39,8 +36,6 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return NSLocalizedString("modifier.command", comment: "")
         case .control:
             return NSLocalizedString("modifier.control", comment: "")
-        case .shift:
-            return NSLocalizedString("modifier.shift", comment: "")
         case .disabled:
             return NSLocalizedString("modifier.disabled", comment: "")
         }
@@ -54,8 +49,6 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
             return .maskCommand
         case .control:
             return .maskControl
-        case .shift:
-            return .maskShift
         case .disabled:
             return []
         }
@@ -74,20 +67,17 @@ enum TriggerModifier: String, CaseIterable, Identifiable {
         if self == .disabled {
             return false
         }
-        let isShift = flags.contains(.maskShift)
         let isControl = flags.contains(.maskControl)
         let isOption = flags.contains(.maskAlternate)
         let isCommand = flags.contains(.maskCommand)
 
         switch self {
         case .option:
-            return isShift || isControl || isCommand
+            return isControl || isCommand
         case .command:
-            return isShift || isControl || isOption
+            return isControl || isOption
         case .control:
-            return isShift || isOption || isCommand
-        case .shift:
-            return isControl || isOption || isCommand
+            return isOption || isCommand
         case .disabled:
             return false
         }
