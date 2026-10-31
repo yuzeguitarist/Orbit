@@ -16,11 +16,14 @@ build/
 *.xccheckout
 *.xcscmblueprint
 *.xcarchive
+*.xcresult
 *.dSYM
 *.dSYM.zip
 *.hmap
 *.ipa
-*.xcodeproj/project.xcworkspace/
+*.app/
+*.dmg
+*.pkg
 
 # Swift Package Manager
 .build/
