@@ -1,0 +1,19 @@
+Orbit/Views/AppCardView.swift
+  s_cad7da6e15d85d::t_a43bb6ff9700cb 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "12ba5fe468592983fc6730c395edfc1f0f534517",
+  "prompts": {},
+  "sessions": {
+    "s_cad7da6e15d85d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19029-8dd0-7973-b5c9-03bed99987c2",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    }
+  }
+}
