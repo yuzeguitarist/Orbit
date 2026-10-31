@@ -1,0 +1,19 @@
+.gitignore
+  s_9c78b30f216a32::t_f3ce7ad4561463 19,24-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a94b2562f368300b548fb0766e7bdb66c7cad1fb",
+  "prompts": {},
+  "sessions": {
+    "s_9c78b30f216a32": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19028-825d-7290-8017-58b1b6e60611",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    }
+  }
+}
