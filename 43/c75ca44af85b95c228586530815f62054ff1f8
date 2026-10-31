@@ -1,0 +1,29 @@
+Orbit.xcodeproj/project.pbxproj
+  s_3d0cf2938ccde4::t_1712aaf678fdf9 434,470,490,511,530,549
+Orbit/Services/HotKeyService.swift
+  s_11294b499d4df2::t_6444ea95066638 253
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "43c75ca44af85b95c228586530815f62054ff1f8",
+  "prompts": {},
+  "sessions": {
+    "s_11294b499d4df2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1902d-3af2-7eb1-a9b2-6412b32a3f0d",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    },
+    "s_3d0cf2938ccde4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1902b-fe3e-7c02-bb94-ae58cdce9157",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    }
+  }
+}
