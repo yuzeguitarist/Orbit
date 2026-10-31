@@ -203,6 +203,16 @@ enum CardSize: String, CaseIterable {
 struct OrbitConfig {
     // MARK: - 触发配置
 
+    static var defaults: UserDefaults {
+        #if DEBUG
+        if let suite = ProcessInfo.processInfo.environment["ORBIT_UI_TEST_DEFAULTS_SUITE"],
+           let defaults = UserDefaults(suiteName: suite) {
+            return defaults
+        }
+        #endif
+        return .standard
+    }
+
     enum DefaultsKey {
         static let longPressThreshold = "orbit.longPressThreshold"
         static let triggerModifier = "orbit.triggerModifier"
@@ -225,31 +235,31 @@ struct OrbitConfig {
 
     static var longPressThreshold: TimeInterval {
         get {
-            let stored = UserDefaults.standard.double(forKey: DefaultsKey.longPressThreshold)
+            let stored = defaults.double(forKey: DefaultsKey.longPressThreshold)
             return stored > 0 ? stored : defaultLongPressThreshold
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKey.longPressThreshold)
+            defaults.set(newValue, forKey: DefaultsKey.longPressThreshold)
         }
     }
 
     /// 触发用的修饰键
     static var triggerModifier: TriggerModifier {
         get {
-            let stored = UserDefaults.standard.string(forKey: DefaultsKey.triggerModifier)
+            let stored = defaults.string(forKey: DefaultsKey.triggerModifier)
             return TriggerModifier(rawValue: stored ?? "") ?? .option
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: DefaultsKey.triggerModifier)
+            defaults.set(newValue.rawValue, forKey: DefaultsKey.triggerModifier)
         }
     }
 
     static var isCmdTabShortcutEnabled: Bool {
         get {
-            UserDefaults.standard.object(forKey: DefaultsKey.cmdTabShortcutEnabled) as? Bool ?? true
+            defaults.object(forKey: DefaultsKey.cmdTabShortcutEnabled) as? Bool ?? true
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKey.cmdTabShortcutEnabled)
+            defaults.set(newValue, forKey: DefaultsKey.cmdTabShortcutEnabled)
         }
     }
 
@@ -258,64 +268,68 @@ struct OrbitConfig {
     }
 
     static func triggerHelpText(longPressKey: String, shortcutKey: String, disabledKey: String) -> String {
+        if let customShortcut {
+            return String(format: NSLocalizedString(shortcutKey, comment: ""), customShortcut.displayString)
+        }
         if isCmdTabShortcutEnabled {
             return String(format: NSLocalizedString(shortcutKey, comment: ""), cmdTabShortcut.displayString)
         }
         if triggerModifier == .disabled {
             return NSLocalizedString(disabledKey, comment: "")
         }
-        return String(format: NSLocalizedString(longPressKey, comment: ""), triggerModifier.symbol)
+        let key = modifierTriggerMode == .doubleTapAndHold ? longPressKey + ".double" : longPressKey
+        return String(format: NSLocalizedString(key, comment: ""), triggerModifier.symbol)
     }
 
     /// 卡片大小
     static var cardSize: CardSize {
         get {
-            let stored = UserDefaults.standard.string(forKey: DefaultsKey.cardSize)
+            let stored = defaults.string(forKey: DefaultsKey.cardSize)
             return CardSize(rawValue: stored ?? "") ?? .medium
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: DefaultsKey.cardSize)
+            defaults.set(newValue.rawValue, forKey: DefaultsKey.cardSize)
         }
     }
 
     /// 圆环是否固定在屏幕中心
     static var lockRingToScreenCenter: Bool {
         get {
-            UserDefaults.standard.bool(forKey: DefaultsKey.lockRingToScreenCenter)
+            defaults.bool(forKey: DefaultsKey.lockRingToScreenCenter)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKey.lockRingToScreenCenter)
+            defaults.set(newValue, forKey: DefaultsKey.lockRingToScreenCenter)
         }
     }
 
     /// 圆环卡片内容朝向是否保持朝上
     static var lockRingItemsUpright: Bool {
         get {
-            UserDefaults.standard.bool(forKey: DefaultsKey.lockRingItemsUpright)
+            defaults.bool(forKey: DefaultsKey.lockRingItemsUpright)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKey.lockRingItemsUpright)
+            defaults.set(newValue, forKey: DefaultsKey.lockRingItemsUpright)
         }
     }
 
     /// 剪贴板圆环是否启用 Liquid Glass
     static var clipboardRingUsesLiquidGlass: Bool {
         get {
-            UserDefaults.standard.bool(forKey: DefaultsKey.clipboardRingUsesLiquidGlass)
+            defaults.bool(forKey: DefaultsKey.clipboardRingUsesLiquidGlass)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKey.clipboardRingUsesLiquidGlass)
+            defaults.set(newValue, forKey: DefaultsKey.clipboardRingUsesLiquidGlass)
         }
     }
 
     /// 圆环动画速度倍率（1.0 为默认速度）
     static var ringAnimationSpeed: Double {
         get {
-            let stored = UserDefaults.standard.double(forKey: DefaultsKey.ringAnimationSpeed)
+            let stored = defaults.double(forKey: DefaultsKey.ringAnimationSpeed)
             return stored > 0 ? stored : defaultRingAnimationSpeed
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKey.ringAnimationSpeed)
+            defaults.set(newValue, forKey: DefaultsKey.ringAnimationSpeed)
         }
     }
 
@@ -350,7 +364,7 @@ struct OrbitConfig {
     /// 当前卡片材质
     static var cardMaterial: CardMaterial {
         get {
-            let stored = UserDefaults.standard.string(forKey: "orbit.cardMaterial")
+            let stored = defaults.string(forKey: "orbit.cardMaterial")
             let material = CardMaterial(rawValue: stored ?? "") ?? .system
             if material == .liquidGlass, !isLiquidGlassAvailable {
                 return .system
@@ -358,7 +372,7 @@ struct OrbitConfig {
             return material
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: "orbit.cardMaterial")
+            defaults.set(newValue.rawValue, forKey: "orbit.cardMaterial")
         }
     }
 

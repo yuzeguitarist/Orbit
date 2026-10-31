@@ -33,17 +33,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // 设置为后台应用（无 Dock 图标）
         NSApp.setActivationPolicy(.accessory)
 
+        AppListService.shared.startTracking()
+
         // 创建菜单栏图标
         setupStatusItem()
+
+        // 安装窗口通知后再启动监听，确保首次快捷键也能显示圆环。
+        setupOrbitObserver()
+
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["ORBIT_UI_TEST_DEFAULTS_SUITE"] != nil {
+            if ProcessInfo.processInfo.environment["ORBIT_UI_TEST_ENABLE_GLOBAL_HOTKEYS"] == "1",
+               HotKeyService.checkAccessibilityPermission() {
+                HotKeyService.shared.startListening()
+            }
+            SettingsWindowController.shared.show()
+            return
+        }
+        #endif
 
         // 检查并启动键盘监听
         if HotKeyService.checkAccessibilityPermission() {
             HotKeyService.shared.startListening()
         }
 
-        // 监听显示状态变化
-        setupOrbitObserver()
-        
         // Check for Welcome View
         // Use a short delay to ensure app is fully ready
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -163,13 +176,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     let location = notification.userInfo?["location"] as? CGPoint ?? NSEvent.mouseLocation
                     let trigger = notification.userInfo?["trigger"] as? String
                     let autoSelectFirstApp = trigger == "cmdTab"
-                    Task { @MainActor in
+                    MainActor.assumeIsolated {
                         OrbitWindowController.shared.show(at: location, autoSelectFirstApp: autoSelectFirstApp)
                     }
                 } else {
                     let shouldActivate = notification.userInfo?["activate"] as? Bool ?? false
                     let dismissStyle = notification.userInfo?["dismissStyle"] as? String
-                    Task { @MainActor in
+                    MainActor.assumeIsolated {
                         if shouldActivate {
                             OrbitWindowController.shared.hide(activateSelected: true)
                         } else {
@@ -194,7 +207,7 @@ final class SettingsWindowController: NSWindowController {
         let settingsView = SettingsView()
         let hostingView = NSHostingView(rootView: settingsView)
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 360, height: 440),
+            contentRect: NSRect(x: 0, y: 0, width: 480, height: 700),
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered,
             defer: false
@@ -220,6 +233,8 @@ final class SettingsWindowController: NSWindowController {
 struct SettingsView: View {
     @State private var longPressThreshold: Double = OrbitConfig.longPressThreshold
     @State private var triggerModifier: TriggerModifier = OrbitConfig.triggerModifier
+    @State private var modifierTriggerMode: ModifierTriggerMode = OrbitConfig.modifierTriggerMode
+    @State private var customShortcut: TriggerShortcut? = OrbitConfig.customShortcut
     @State private var isCmdTabShortcutEnabled: Bool = OrbitConfig.isCmdTabShortcutEnabled
     @State private var cardSize: CardSize = OrbitConfig.cardSize
     @State private var cardMaterial: OrbitConfig.CardMaterial = OrbitConfig.cardMaterial
@@ -254,6 +269,22 @@ struct SettingsView: View {
                     ForEach(TriggerModifier.allCases) { modifier in
                         Text(modifier.localizedName).tag(modifier)
                     }
+                }
+                .accessibilityIdentifier("settings.trigger.modifier")
+                Picker("settings.trigger.mode", selection: $modifierTriggerMode) {
+                    ForEach(ModifierTriggerMode.allCases) { mode in
+                        Text(mode.localizedName).tag(mode)
+                    }
+                }
+                .disabled(triggerModifier == .disabled)
+                .accessibilityIdentifier("settings.trigger.mode")
+                .onChange(of: modifierTriggerMode) { _, newValue in
+                    OrbitConfig.modifierTriggerMode = newValue
+                }
+                if modifierTriggerMode == .doubleTapAndHold {
+                    Text("settings.trigger.double_tap_hint")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
                 Text("settings.trigger.shift_toggle_hint")
                     .font(.caption)
@@ -290,7 +321,14 @@ struct SettingsView: View {
                 .onChange(of: isCmdTabShortcutEnabled) { _, newValue in
                     OrbitConfig.isCmdTabShortcutEnabled = newValue
                 }
+
+                ShortcutRecorderView(shortcut: $customShortcut)
+                    .onChange(of: customShortcut) { _, newValue in
+                        OrbitConfig.customShortcut = newValue
+                    }
             }
+
+            AppListSettingsView()
 
             Section("settings.section.appearance") {
                 Picker("settings.card_size", selection: $cardSize) {
@@ -365,16 +403,19 @@ struct SettingsView: View {
                 Text("settings.usage.line2")
                 Text("settings.usage.line3")
                 Text("settings.usage.line4")
+                Text("settings.usage.cancel")
             }
             .foregroundColor(.secondary)
             .font(.callout)
         }
         .formStyle(.grouped)
-        .frame(width: 350, height: 430)
+        .frame(width: 470, height: 690)
         .onAppear {
             hasPermission = HotKeyService.checkAccessibilityPermission()
             longPressThreshold = OrbitConfig.longPressThreshold
             triggerModifier = OrbitConfig.triggerModifier
+            modifierTriggerMode = OrbitConfig.modifierTriggerMode
+            customShortcut = OrbitConfig.customShortcut
             cardSize = OrbitConfig.cardSize
             cardMaterial = OrbitConfig.cardMaterial
             lockRingToScreenCenter = OrbitConfig.lockRingToScreenCenter

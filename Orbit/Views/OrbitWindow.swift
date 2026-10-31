@@ -129,6 +129,46 @@ protocol FileDragDelegate: AnyObject {
     func fileDragPerformed(urls: [URL], location: CGPoint, isOverCenter: Bool) -> Bool
 }
 
+/// 取消或重新展示后，旧的提交与动画回调不能继续操作圆环。
+struct OrbitDismissalState {
+    private(set) var presentationID = UUID()
+    private(set) var isShowing = false
+    private(set) var isDismissing = false
+    private var isCommitPending = false
+
+    mutating func begin() {
+        presentationID = UUID()
+        isShowing = true
+        isDismissing = false
+        isCommitPending = false
+    }
+
+    mutating func beginCommit() -> UUID? {
+        guard isShowing, !isDismissing, !isCommitPending else { return nil }
+        isCommitPending = true
+        return presentationID
+    }
+
+    func acceptsCompletion(for id: UUID) -> Bool {
+        isShowing && presentationID == id
+    }
+
+    mutating func beginDismissal() -> UUID? {
+        guard isShowing, !isDismissing else { return nil }
+        presentationID = UUID()
+        isCommitPending = false
+        isDismissing = true
+        return presentationID
+    }
+
+    mutating func close() {
+        presentationID = UUID()
+        isShowing = false
+        isDismissing = false
+        isCommitPending = false
+    }
+}
+
 /// Orbit 弹窗控制器
 final class OrbitWindowController: NSObject, FileDragDelegate {
     static let shared = OrbitWindowController()
@@ -139,13 +179,14 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
     private var localEventMonitor: Any?
     private var toggleObserver: Any?
     private var cycleObserver: Any?
-    private var isShowing = false
-    private var isDismissing = false
+    private var dismissalState = OrbitDismissalState()
+    private var isShowing: Bool { dismissalState.isShowing }
+    private var isDismissing: Bool { dismissalState.isDismissing }
     private var previousFrontmostApp: NSRunningApplication?
     private var shouldRestorePreviousAppOnClose = false
     /// 剪贴板模式下松开触发键：关闭并切回原 App 后发送 ⌘V（Deck #166）。
     private var shouldPasteAfterClose = false
-    private var presentationID = UUID()
+    private var presentationID: UUID { dismissalState.presentationID }
 
     private override init() {
         super.init()
@@ -154,8 +195,7 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
     @MainActor
     func show(at mousePosition: CGPoint, autoSelectFirstApp: Bool = false) {
         guard !isShowing else { return }
-        isShowing = true
-        presentationID = UUID()
+        dismissalState.begin()
 
         let context = currentContext()
         let anchorPosition = anchorPosition(for: mousePosition)
@@ -168,7 +208,7 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
         )
 
         guard ringCoordinator.appViewModel.appCount > 0 else {
-            isShowing = false
+            dismissImmediately()
             return
         }
 
@@ -182,8 +222,7 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
     @MainActor
     func showForFileDrag(at mousePosition: CGPoint) {
         guard !isShowing else { return }
-        isShowing = true
-        presentationID = UUID()
+        dismissalState.begin()
 
         let context = currentContext()
         let anchorPosition = anchorPosition(for: mousePosition)
@@ -201,64 +240,62 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
 
     @MainActor
     func hide(activateSelected: Bool = false) {
-        guard isShowing, !isDismissing else { return }
-
-        if activateSelected && ringCoordinator.isTransitioning {
+        guard isShowing else { return }
+        guard activateSelected else {
+            dismissImmediately()
             return
         }
+        guard !ringCoordinator.isTransitioning else {
+            dismissImmediately()
+            return
+        }
+        guard let currentPresentationID = dismissalState.beginCommit() else { return }
 
-        var didActivateApp = false
-
-        // 先激活应用，再关闭窗口
-        if activateSelected {
-            if ringCoordinator.mode == .apps {
-                let activated = ringCoordinator.appViewModel.activateSelectedApp()
-                didActivateApp = activated
-                print("OrbitWindowController: Activated app: \(activated)")
-                if !activated {
-                    shouldRestorePreviousAppOnClose = true
-                    if HotKeyService.shared.dismissStyle == .animated {
-                        dismissAnimated()
-                    } else {
-                        dismissImmediately()
-                    }
-                    return
-                }
+        if ringCoordinator.mode == .apps {
+            let activated = ringCoordinator.appViewModel.activateSelectedApp()
+            shouldRestorePreviousAppOnClose = !activated
+            if !activated, HotKeyService.shared.dismissStyle == .animated {
+                dismissAnimated()
             } else {
-                // 剪贴板模式：先让 Deck 把选中内容写入剪贴板，再关闭并粘贴到原来的 App。
-                let currentPresentationID = presentationID
-                ringCoordinator.clipboardViewModel.copySelectedItem { [weak self] success in
-                    Task { @MainActor in
-                        guard let self, self.isShowing, self.presentationID == currentPresentationID else { return }
-                        self.shouldPasteAfterClose = success
-                        if HotKeyService.shared.dismissStyle == .animated {
-                            self.dismissAnimated()
-                        } else {
-                            self.dismissImmediately()
-                        }
+                closePanel()
+            }
+        } else {
+            // 剪贴板模式：先写入剪贴板，再关闭并粘贴到原来的 App。
+            ringCoordinator.clipboardViewModel.copySelectedItem { [weak self] success in
+                Task { @MainActor in
+                    guard let self, self.dismissalState.acceptsCompletion(for: currentPresentationID) else { return }
+                    self.shouldPasteAfterClose = success
+                    self.shouldRestorePreviousAppOnClose = true
+                    if HotKeyService.shared.dismissStyle == .animated {
+                        self.startCloseAnimation()
+                    } else {
+                        self.closePanel()
                     }
                 }
-                return
             }
         }
-
-        // 立即关闭，不做收起动画
-        shouldRestorePreviousAppOnClose = !didActivateApp
-        closePanel()
     }
 
     @MainActor
     func dismissImmediately() {
-        guard !isDismissing else { return }
+        guard isShowing else { return }
+        shouldPasteAfterClose = false
         shouldRestorePreviousAppOnClose = true
         closePanel()
     }
 
     @MainActor
     func dismissAnimated() {
-        guard isShowing, !isDismissing else { return }
-        isDismissing = true
+        guard isShowing else { return }
+        shouldPasteAfterClose = false
         shouldRestorePreviousAppOnClose = true
+        HotKeyService.shared.notifyOrbitDismissed()
+        startCloseAnimation()
+    }
+
+    @MainActor
+    private func startCloseAnimation() {
+        guard let currentPresentationID = dismissalState.beginDismissal() else { return }
 
         if ringCoordinator.isTransitioning {
             closePanel()
@@ -270,13 +307,15 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
         case .apps:
             ringCoordinator.appViewModel.startCollapseAnimation(speed: speed) { [weak self] in
                 Task { @MainActor in
-                    self?.closePanel()
+                    guard let self, self.dismissalState.acceptsCompletion(for: currentPresentationID) else { return }
+                    self.closePanel()
                 }
             }
         case .clipboard:
             ringCoordinator.clipboardViewModel.startCollapseAnimation(speed: speed) { [weak self] in
                 Task { @MainActor in
-                    self?.closePanel()
+                    guard let self, self.dismissalState.acceptsCompletion(for: currentPresentationID) else { return }
+                    self.closePanel()
                 }
             }
         }
@@ -312,6 +351,8 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
             backing: .buffered,
             defer: false
         )
+        panel.title = "Orbit"
+        panel.setAccessibilityIdentifier("orbit.ring")
 
         // 创建拖拽容器视图
         let containerView = DragDropContainerView(frame: NSRect(origin: .zero, size: windowSize))
@@ -320,11 +361,15 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
 
         // 创建 SwiftUI 托管视图
         let hostingView = NSHostingView(
-            rootView: OrbitRingContainerView(coordinator: ringCoordinator) { [weak self] in
-                Task { @MainActor in
+            rootView: OrbitRingContainerView(
+                coordinator: ringCoordinator,
+                onCommit: { [weak self] in
+                    self?.hide(activateSelected: true)
+                },
+                onCancel: { [weak self] in
                     self?.hide(activateSelected: false)
                 }
-            }
+            )
         )
         hostingView.frame = containerView.bounds
         hostingView.autoresizingMask = [.width, .height]
@@ -371,9 +416,7 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
     }
 
     private func closePanel() {
-        isShowing = false
-        isDismissing = false
-        presentationID = UUID()
+        dismissalState.close()
         let shouldRestorePreviousApp = shouldRestorePreviousAppOnClose
         shouldRestorePreviousAppOnClose = false
         let shouldPaste = shouldPasteAfterClose
@@ -390,14 +433,17 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
             restorePreviousFrontmostApp(appToRestore)
         }
         if shouldPaste {
-            postPasteShortcut()
+            postPasteShortcut(to: appToRestore)
         }
     }
 
     /// 等原 App 重新激活后再发送 ⌘V。
-    private func postPasteShortcut() {
-        guard AXIsProcessTrusted() else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+    private func postPasteShortcut(to app: NSRunningApplication?) {
+        guard AXIsProcessTrusted(), let app else { return }
+        let closedPresentationID = presentationID
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
+            guard let self, self.presentationID == closedPresentationID, !self.isShowing,
+                  NSWorkspace.shared.frontmostApplication?.processIdentifier == app.processIdentifier else { return }
             let source = CGEventSource(stateID: .privateState)
             guard let keyDown = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: true),
                   let keyUp = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: false) else { return }
@@ -462,8 +508,8 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                Task { @MainActor [weak self] in
-                    guard let self, self.isShowing else { return }
+                MainActor.assumeIsolated {
+                    guard let self, self.isShowing, !self.isDismissing else { return }
                     self.ringCoordinator.toggleMode()
                 }
             }
@@ -476,8 +522,8 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
                 queue: .main
             ) { [weak self] notification in
                 let direction = notification.userInfo?["direction"] as? String
-                Task { @MainActor [weak self] in
-                    guard let self, self.isShowing else { return }
+                MainActor.assumeIsolated {
+                    guard let self, self.isShowing, !self.isDismissing else { return }
                     switch self.ringCoordinator.mode {
                     case .apps:
                         if direction == "previous" {
@@ -505,6 +551,7 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
     }
 
     private func handleKeyEvent(_ event: NSEvent) {
+        guard isShowing else { return }
         switch ringCoordinator.mode {
         case .apps:
             handleAppKeyEvent(event)
@@ -515,44 +562,39 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
 
     private func handleAppKeyEvent(_ event: NSEvent) {
         if event.keyCode == 53 { // Esc
-            Task { @MainActor in
-                self.hide(activateSelected: false)
-            }
+            hide(activateSelected: false)
             return
         }
 
         if event.keyCode == 36 { // Enter
-            Task { @MainActor in
-                self.hide(activateSelected: true)
-            }
+            hide(activateSelected: true)
             return
         }
 
-        Task { @MainActor in
-            let result = self.ringCoordinator.appViewModel.handleKeyPress(
-                event.keyCode,
-                characters: event.characters,
-                charactersIgnoringModifiers: event.charactersIgnoringModifiers,
-                modifierFlags: event.modifierFlags
-            )
-            if result == .activateAndDismiss {
-                self.hide(activateSelected: false)
-            }
+        let result = ringCoordinator.appViewModel.handleKeyPress(
+            event.keyCode,
+            characters: event.characters,
+            charactersIgnoringModifiers: event.charactersIgnoringModifiers,
+            modifierFlags: event.modifierFlags
+        )
+        if result == .activateAndDismiss {
+            hide(activateSelected: true)
         }
     }
 
     private func handleClipboardKeyEvent(_ event: NSEvent) {
         if event.keyCode == 53 { // Esc
-            Task { @MainActor in
-                self.hide(activateSelected: false)
-            }
+            hide(activateSelected: false)
+            return
+        }
+
+        if event.keyCode == 36 { // Enter
+            hide(activateSelected: true)
             return
         }
 
         if event.keyCode == 51 || event.keyCode == 117 { // Delete / Forward Delete
-            Task { @MainActor in
-                self.ringCoordinator.clipboardViewModel.deleteSelectedItem()
-            }
+            ringCoordinator.clipboardViewModel.deleteSelectedItem()
             return
         }
 
@@ -571,14 +613,12 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
             return
         }
 
-        Task { @MainActor in
-            _ = self.ringCoordinator.clipboardViewModel.handleKeyPress(
-                event.keyCode,
-                characters: event.characters,
-                charactersIgnoringModifiers: event.charactersIgnoringModifiers,
-                modifierFlags: event.modifierFlags
-            )
-        }
+        _ = ringCoordinator.clipboardViewModel.handleKeyPress(
+            event.keyCode,
+            characters: event.characters,
+            charactersIgnoringModifiers: event.charactersIgnoringModifiers,
+            modifierFlags: event.modifierFlags
+        )
     }
 
     private func removeEventMonitors() {
