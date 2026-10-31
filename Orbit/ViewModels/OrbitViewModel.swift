@@ -60,7 +60,6 @@ final class OrbitViewModel: ObservableObject {
     private var letterMatchCache: [Character: [Int]] = [:] // 首字母匹配缓存
     private var currentLetterIndex: [Character: Int] = [:] // 当前字母循环索引
     private var contextAppId: String?
-    private var predictionRequestId = UUID()
     private var animationSequenceId = UUID()
     private var dissolveSequenceIds: [String: UUID] = [:]
     private var dropTransitionSequenceId = UUID()
@@ -93,7 +92,6 @@ final class OrbitViewModel: ObservableObject {
     }
 
     func resetPresentationState() {
-        predictionRequestId = UUID()
         contextAppId = nil
         resetAnimationState()
     }
@@ -104,45 +102,6 @@ final class OrbitViewModel: ObservableObject {
         selectedIndex = -1
         resetAnimationState()
         buildLetterCache()
-        applyPredictedOrdering()
-    }
-
-    func applyPredictedOrdering() {
-        guard let contextAppId else { return }
-        let candidateIds = apps.map { $0.id }
-        guard !candidateIds.isEmpty else { return }
-
-        let requestId = UUID()
-        predictionRequestId = requestId
-
-        Task { [contextAppId, candidateIds, requestId] in
-            let rankedIds = await OrbitJumpModel.shared.rankedAppIds(
-                contextAppId: contextAppId,
-                candidates: candidateIds
-            )
-            guard self.predictionRequestId == requestId else { return }
-            let originalApps = self.apps
-            guard originalApps.count == candidateIds.count else { return }
-            guard originalApps.map({ $0.id }) == candidateIds else { return }
-
-            var buckets: [String: [AppInfo]] = [:]
-            buckets.reserveCapacity(originalApps.count)
-            for app in originalApps {
-                buckets[app.id, default: []].append(app)
-            }
-
-            var ordered: [AppInfo] = []
-            ordered.reserveCapacity(originalApps.count)
-            for id in rankedIds {
-                if let bucket = buckets[id] {
-                    ordered.append(contentsOf: bucket)
-                }
-            }
-
-            guard ordered.count == originalApps.count else { return }
-            self.apps = ordered
-            self.buildLetterCache()
-        }
     }
 
     /// 设置锚点位置（鼠标位置）
@@ -311,7 +270,6 @@ final class OrbitViewModel: ObservableObject {
 
         // Enter - 确认
         if keyCode == 36 {
-            activateSelectedApp()
             return .activateAndDismiss
         }
 
@@ -427,7 +385,6 @@ final class OrbitViewModel: ObservableObject {
 
     private func resetAnimationState() {
         animationSequenceId = UUID()
-        predictionRequestId = UUID()
         dropTransitionSequenceId = UUID()
         cardAnimationProgress = Array(repeating: 0, count: visibleCount)
         isExpanding = false

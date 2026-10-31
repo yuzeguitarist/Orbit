@@ -10,7 +10,7 @@ import SwiftUI
 /// C形环布局 - 卡片像旋转楼梯层叠
 struct OrbitRingView: View {
     @ObservedObject var viewModel: OrbitViewModel
-    let onDismiss: () -> Void
+    let onCommit: () -> Void
     private static let dragCoordinateSpaceName = "OrbitRingDragSpace"
 
     var body: some View {
@@ -61,8 +61,7 @@ struct OrbitRingView: View {
                         // 只有在非拖拽状态下才响应点击
                         guard viewModel.getCardDragState(appId: app.id) == .idle else { return }
                         viewModel.selectByIndex(index)
-                        viewModel.activateSelectedApp()
-                        onDismiss()
+                        onCommit()
                     }
                     .onHover { isHovering in
                         // 只有在非拖拽状态下才响应悬停
@@ -71,6 +70,9 @@ struct OrbitRingView: View {
                             viewModel.selectByIndex(index)
                         }
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(app.name)
+                    .accessibilityIdentifier("orbit.app.\(app.id)")
                 }
             }
 
