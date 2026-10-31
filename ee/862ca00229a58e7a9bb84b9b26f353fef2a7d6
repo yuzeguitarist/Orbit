@@ -1,0 +1,61 @@
+Orbit.xcodeproj/project.pbxproj
+  s_7b142bf2405eee::t_08cbed17240e86 419,456
+Orbit/Resources/de.lproj/Localizable.strings
+  s_54bc977c1d93cb::t_7216b48409f5fd 72
+Orbit/Resources/ja.lproj/Localizable.strings
+  s_54bc977c1d93cb::t_680a5c99a8e932 80
+Orbit/Resources/ko.lproj/Localizable.strings
+  s_54bc977c1d93cb::t_352a8665dedc02 78,93-95
+Orbit/Services/HotKeyService.swift
+  s_78eb9c9c970c84::t_c785d502defaff 28-30,101-112,130-142
+Orbit/Services/HotKeyState.swift
+  s_78eb9c9c970c84::t_80cd882928fd40 129-140
+Orbit/Views/OrbitWindow.swift
+  s_78eb9c9c970c84::t_bf661e1c705aa5 257-261
+Orbit/Views/ShortcutRecorderView.swift
+  s_78eb9c9c970c84::t_cc358c8de67a26 47-50,52,57-71,78-79
+OrbitTests/AppListServiceTests.swift
+  s_78eb9c9c970c84::t_5f378fb0caa0fd 106,119
+OrbitTests/HotKeyServiceTests.swift
+  s_78eb9c9c970c84::t_2271758e20be95 78-94,186-202
+OrbitTests/OrbitDismissalTests.swift
+  s_78eb9c9c970c84::t_7a3727e8b08cd3 5,9,12,15,18,20,27,30,39,42,60,63,66
+OrbitUITests/OrbitGlobalHotKeyTests.swift
+  s_7b142bf2405eee::t_40c83c3d53cd2a 5-7
+OrbitUITests/OrbitSettingsTests.swift
+  s_78eb9c9c970c84::t_5278f3b1435925 81-85,177
+Scripts/GlobalHotKeyRegression.swift
+  s_7b142bf2405eee::t_b18219dcad95d9 1-2,191-193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ee862ca00229a58e7a9bb84b9b26f353fef2a7d6",
+  "prompts": {},
+  "sessions": {
+    "s_54bc977c1d93cb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19084-611b-7691-8231-150c4268ae90",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    },
+    "s_78eb9c9c970c84": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1902c-cc00-75b3-9399-bee20215e012",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    },
+    "s_7b142bf2405eee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19084-304e-7cd1-9e0c-ed523183c4f2",
+        "model": "unknown"
+      },
+      "human_author": "Yuze Pan <145409865+yuzeguitarist@users.noreply.github.com>"
+    }
+  }
+}
