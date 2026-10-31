@@ -34,7 +34,6 @@ final class HotKeyService: ObservableObject {
     private var isTriggerHeld = false
     private var otherKeyPressed = false
     private var activeTrigger: TriggerSource?
-    private let timerQueue = DispatchQueue(label: "com.orbit.hotkey.timer")
     private var lastInputSource: TISInputSource?
     private var globalFlagsMonitor: Any?
     private var localFlagsMonitor: Any?
@@ -251,7 +250,7 @@ final class HotKeyService: ObservableObject {
 
         let threshold = OrbitConfig.longPressThreshold / 1000.0
 
-        let timer = DispatchSource.makeTimerSource(queue: timerQueue)
+        let timer = DispatchSource.makeTimerSource(queue: .main)
         timer.schedule(deadline: .now() + threshold)
         timer.setEventHandler { [weak self] in
             self?.onLongPress()
