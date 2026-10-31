@@ -75,6 +75,23 @@ struct HotKeyServiceTests {
         #expect(!state.isVisible)
     }
 
+    @Test(arguments: [NSEvent.ModifierFlags.command, [.command, .shift]])
+    func configuredCmdTabShortcutTakesPrecedenceOverBuiltIn(modifiers: NSEvent.ModifierFlags) {
+        var state = HotKeyState()
+        let shortcut = TriggerShortcut(keyCode: 48, modifiers: modifiers, keyLabel: "Tab")
+        let config = configuration(customShortcut: shortcut)
+        let result = state.keyDown(48, flags: modifiers, isRepeat: false, config: config)
+        #expect(result.consumed)
+        #expect(result.actions.contains(.show(.custom(shortcut))))
+        #expect(!result.actions.contains(.show(.cmdTab)))
+        #expect(!result.actions.contains(.cycle(previous: true)))
+        let repeated = state.keyDown(48, flags: modifiers, isRepeat: true, config: config)
+        #expect(repeated.consumed)
+        #expect(repeated.actions.isEmpty)
+        #expect(state.keyDown(48, flags: modifiers, isRepeat: false, config: config)
+            .actions.contains(.dismiss(activate: false)))
+    }
+
     @Test func quickModifierReleaseInvalidatesPendingHold() {
         var state = HotKeyState()
         let config = configuration()
@@ -164,6 +181,23 @@ struct HotKeyServiceTests {
         #expect(state.usesShiftAsTrigger)
         #expect(!state.flagsChanged([.control, .shift], at: 0, config: config).contains(.dismiss(activate: true)))
         #expect(state.flagsChanged(.control, at: 1, config: config).contains(.dismiss(activate: true)))
+    }
+
+    @Test(arguments: [NSEvent.ModifierFlags.option, [.control, .option]])
+    func customCombinationAdoptsRingOpenedByModifierHold(modifiers: NSEvent.ModifierFlags) {
+        var state = HotKeyState()
+        let shortcut = TriggerShortcut(keyCode: 40, modifiers: modifiers, keyLabel: "K")
+        let config = configuration(customShortcut: shortcut)
+        _ = state.flagsChanged(.option, at: 0, config: config)
+        #expect(state.holdElapsed(config: config).contains(.show(.modifier(.option))))
+        _ = state.flagsChanged(modifiers, at: 0.2, config: config)
+        let result = state.keyDown(40, flags: modifiers, isRepeat: false, config: config)
+        #expect(result.consumed)
+        #expect(result.actions.isEmpty)
+        #expect(state.isVisible)
+        let remainingModifiers: NSEvent.ModifierFlags = modifiers == .option ? [] : .option
+        #expect(state.flagsChanged(remainingModifiers, at: 1, config: config).contains(.dismiss(activate: true)))
+        #expect(!state.flagsChanged([], at: 1.1, config: config).contains(.dismiss(activate: true)))
     }
 
     @Test func standaloneFunctionKeyStaysOpenUntilExplicitDismissal() {

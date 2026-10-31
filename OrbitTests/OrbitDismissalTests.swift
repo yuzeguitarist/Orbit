@@ -2,33 +2,32 @@ import Testing
 @testable import Orbit
 
 struct OrbitDismissalTests {
-    @Test @MainActor func repeatedReleaseOrEnterCommitsOnlyOnce() {
+    @Test @MainActor func repeatedReleaseOrEnterCommitsOnlyOnce() throws {
         var state = OrbitDismissalState()
         state.begin()
 
-        let firstCommit = state.beginCommit()
+        let firstCommit = try #require(state.beginCommit())
 
-        #expect(firstCommit != nil)
         #expect(state.beginCommit() == nil)
-        #expect(state.acceptsCompletion(for: firstCommit!))
+        #expect(state.acceptsCompletion(for: firstCommit))
     }
 
-    @Test @MainActor func cancelDuringClipboardCopyInvalidatesThePendingPaste() {
+    @Test @MainActor func cancelDuringClipboardCopyInvalidatesThePendingPaste() throws {
         var state = OrbitDismissalState()
         state.begin()
-        let pendingCopy = state.beginCommit()!
+        let pendingCopy = try #require(state.beginCommit())
 
-        let cancellationAnimation = state.beginDismissal()!
+        let cancellationAnimation = try #require(state.beginDismissal())
 
         #expect(!state.acceptsCompletion(for: pendingCopy))
         #expect(state.acceptsCompletion(for: cancellationAnimation))
         #expect(state.beginCommit() == nil)
     }
 
-    @Test @MainActor func escapeDuringCollapseCanCloseImmediately() {
+    @Test @MainActor func escapeDuringCollapseCanCloseImmediately() throws {
         var state = OrbitDismissalState()
         state.begin()
-        let pendingAnimation = state.beginDismissal()!
+        let pendingAnimation = try #require(state.beginDismissal())
 
         state.close()
 
@@ -37,10 +36,10 @@ struct OrbitDismissalTests {
         #expect(state.beginCommit() == nil)
     }
 
-    @Test @MainActor func oldAnimationCannotCloseANewPresentation() {
+    @Test @MainActor func oldAnimationCannotCloseANewPresentation() throws {
         var state = OrbitDismissalState()
         state.begin()
-        let oldAnimation = state.beginDismissal()!
+        let oldAnimation = try #require(state.beginDismissal())
         state.close()
         state.begin()
 
@@ -58,13 +57,13 @@ struct OrbitDismissalTests {
         #expect(state.beginDismissal() == nil)
     }
 
-    @Test @MainActor func aCompletedCommitCanAnimateBeforeClosing() {
+    @Test @MainActor func aCompletedCommitCanAnimateBeforeClosing() throws {
         var state = OrbitDismissalState()
         state.begin()
-        let copy = state.beginCommit()!
+        let copy = try #require(state.beginCommit())
         #expect(state.acceptsCompletion(for: copy))
 
-        let closeAnimation = state.beginDismissal()!
+        let closeAnimation = try #require(state.beginDismissal())
         #expect(!state.acceptsCompletion(for: copy))
         #expect(state.acceptsCompletion(for: closeAnimation))
 

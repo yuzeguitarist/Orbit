@@ -77,6 +77,7 @@
 "triggerMode.hold" = "長押し";
 "triggerMode.doubleTapAndHold" = "2 回押して長押し";
 "settings.trigger.mode" = "修飾キーの操作";
+"settings.trigger.shift_toggle_hint" = "Shift キーでアプリリングとクリップボードリングを切り替えます。";
 "settings.trigger.double_tap_hint" = "一度押して離し、350 ミリ秒以内にもう一度押したままにします。";
 "settings.section.apps" = "アプリケーション";
 "settings.apps.only_windows" = "ウインドウがあるアプリのみ表示";

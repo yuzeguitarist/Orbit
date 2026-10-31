@@ -103,7 +103,7 @@ struct AppListServiceTests {
     }
 
     @Test func aStalePinAppearsInsideTheVisibleRingWithoutReplacingTheMostRecentTarget() {
-        let apps = (0 ..< 17).map { candidate("app\($0)", pid_t($0 + 1)) }
+        let apps = (0 ..< 17).reversed().map { candidate("app\($0)", pid_t($0 + 1)) }
         var history = AppUsageHistory()
         for index in (0 ..< 17).reversed() {
             history.recordActivation(appID: "app\(index)")
@@ -116,7 +116,7 @@ struct AppListServiceTests {
     }
 
     @Test func morePinsThanSlotsUseTheirRecentOrderAndDoNotDuplicateEntries() {
-        let apps = (0 ..< 17).map { candidate("app\($0)", pid_t($0 + 1)) }
+        let apps = (0 ..< 17).reversed().map { candidate("app\($0)", pid_t($0 + 1)) }
         var history = AppUsageHistory()
         for index in (0 ..< 17).reversed() {
             history.recordActivation(appID: "app\(index)")

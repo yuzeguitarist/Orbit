@@ -78,7 +78,11 @@ final class OrbitSettingsTests: XCTestCase {
         search.typeText(applicationName)
 
         let applicationCell = panel.cells
-            .containing(NSPredicate(format: "value == %@", applicationName))
+            .containing(NSPredicate(
+                format: "label IN %@ OR value IN %@",
+                [applicationName, "\(applicationName).app"] as NSArray,
+                [applicationName, "\(applicationName).app"] as NSArray
+            ))
             .firstMatch
         XCTAssertTrue(applicationCell.waitForExistence(timeout: 5))
         XCTAssertTrue(applicationCell.isHittable)
@@ -170,7 +174,7 @@ final class OrbitSettingsTests: XCTestCase {
         attachAccessibilityTree(named: "AX after window filter")
         app.terminate()
         app.launch()
-        XCTAssertTrue(switchFilter.waitForExistence(timeout: 5))
+        XCTAssertTrue(filter.waitForExistence(timeout: 5))
         XCTAssertEqual(booleanValue(of: filter), true)
         logElement(switchFilter, named: "window filter after relaunch")
         XCTAssertTrue(app.staticTexts["Tap once, then press again and hold within 350 ms."].exists)

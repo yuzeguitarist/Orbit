@@ -2,7 +2,9 @@ import AppKit
 import XCTest
 
 /// These tests send keys from other applications through the real Accessibility event tap.
-/// Opt in with TEST_RUNNER_ORBIT_RUN_GLOBAL_HOTKEY_TESTS=1 and sign Orbit with its trusted identity.
+/// When invoking xcodebuild, opt in with TEST_RUNNER_ORBIT_RUN_GLOBAL_HOTKEY_TESTS=1.
+/// Xcode removes TEST_RUNNER_ when forwarding this as ORBIT_RUN_GLOBAL_HOTKEY_TESTS to the runner.
+/// Use a signed Debug build of Orbit with its trusted identity.
 final class OrbitGlobalHotKeyTests: XCTestCase {
     private var app: XCUIApplication!
     private var defaultsSuite = ""

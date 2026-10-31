@@ -44,22 +44,29 @@ struct ShortcutRecorderView: View {
     private func startRecording() {
         invalidShortcut = false
         isRecording = true
-        HotKeyService.shared.isRecordingShortcut = true
+        HotKeyService.shared.startRecordingShortcut { event in
+            record(event)
+        }
+        // Fallback when Accessibility access has not enabled the global event tap.
         monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
-            guard !event.isARepeat else { return nil }
-            if event.keyCode == 53 {
-                stopRecording()
-                return nil
-            }
-            let candidate = TriggerShortcut(event: event)
-            guard candidate.isValidCustomShortcut else {
-                invalidShortcut = true
-                return nil
-            }
-            shortcut = candidate
-            stopRecording()
+            record(event)
             return nil
         }
+    }
+
+    private func record(_ event: NSEvent) {
+        guard !event.isARepeat else { return }
+        if event.keyCode == 53 {
+            stopRecording()
+            return
+        }
+        let candidate = TriggerShortcut(event: event)
+        guard candidate.isValidCustomShortcut else {
+            invalidShortcut = true
+            return
+        }
+        shortcut = candidate
+        stopRecording()
     }
 
     private func stopRecording() {
@@ -68,6 +75,7 @@ struct ShortcutRecorderView: View {
             self.monitor = nil
         }
         isRecording = false
-        HotKeyService.shared.isRecordingShortcut = false
+        invalidShortcut = false
+        HotKeyService.shared.stopRecordingShortcut()
     }
 }

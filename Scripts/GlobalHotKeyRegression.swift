@@ -1,4 +1,5 @@
-// Run: swift Scripts/GlobalHotKeyRegression.swift /path/to/signed/Orbit.app
+// Run: swift Scripts/GlobalHotKeyRegression.swift /path/to/signed/Debug/Orbit.app
+// Requires a signed Debug build; Release builds do not support isolated test preferences.
 // Requires existing Accessibility and event-posting permission; never requests permission.
 import AppKit
 import ApplicationServices
@@ -187,7 +188,9 @@ func clickCalculatorCard() throws {
 }
 
 do {
-    try require(CommandLine.arguments.count == 2, "Usage: swift Scripts/GlobalHotKeyRegression.swift /path/to/signed/Orbit.app")
+    try require(CommandLine.arguments.count == 2, "Usage: swift Scripts/GlobalHotKeyRegression.swift /path/to/signed/Debug/Orbit.app")
+    let appBundle = Bundle(url: URL(fileURLWithPath: CommandLine.arguments[1]))
+    try require(appBundle?.object(forInfoDictionaryKey: "OrbitBuildConfiguration") as? String == "Debug", "A signed Debug build is required; Release builds do not support isolated test preferences.")
     try require(AXIsProcessTrusted() && CGPreflightPostEventAccess(), "Existing Accessibility and event-posting permission are required; no permissions were requested.")
     try require(NSRunningApplication.runningApplications(withBundleIdentifier: "com.yuzeguitar.Orbit").isEmpty, "Quit existing Orbit instances before this isolated regression run.")
     try FileManager.default.createDirectory(at: profileDirectory, withIntermediateDirectories: true)

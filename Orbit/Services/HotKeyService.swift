@@ -25,13 +25,9 @@ final class HotKeyService: ObservableObject {
 
     @Published private(set) var dismissStyle: DismissStyle = .immediate
 
-    var isRecordingShortcut = false {
-        didSet {
-            guard isRecordingShortcut else { return }
-            cancelOrbit()
-            state.reset()
-        }
-    }
+    private(set) var isRecordingShortcut = false
+    private var shortcutRecordingHandler: ((NSEvent) -> Void)?
+    private var recordingConsumedKeys: Set<UInt16> = []
 
     private var state = HotKeyState()
     private var presentationVisible = false
@@ -102,6 +98,18 @@ final class HotKeyService: ObservableObject {
         perform(state.cancel(presentationIsVisible: presentationVisible))
     }
 
+    func startRecordingShortcut(_ handler: @escaping (NSEvent) -> Void) {
+        cancelOrbit()
+        state.reset()
+        shortcutRecordingHandler = handler
+        isRecordingShortcut = true
+    }
+
+    func stopRecordingShortcut() {
+        isRecordingShortcut = false
+        shortcutRecordingHandler = nil
+    }
+
     static func checkAccessibilityPermission() -> Bool {
         #if DEBUG
         if ProcessInfo.processInfo.environment["ORBIT_UI_TEST_DEFAULTS_SUITE"] != nil {
@@ -118,8 +126,20 @@ final class HotKeyService: ObservableObject {
             if let tap = eventTap { CGEvent.tapEnable(tap: tap, enable: true) }
             return Unmanaged.passUnretained(event)
         }
-        guard !isRecordingShortcut else { return Unmanaged.passUnretained(event) }
         let keyCode = UInt16(event.getIntegerValueField(.keyboardEventKeycode))
+        if type == .keyUp, recordingConsumedKeys.remove(keyCode) != nil { return nil }
+        if type == .keyDown, recordingConsumedKeys.contains(keyCode) { return nil }
+        if isRecordingShortcut {
+            if type == .keyDown {
+                recordingConsumedKeys.insert(keyCode)
+                if event.getIntegerValueField(.keyboardEventAutorepeat) == 0,
+                   let recordingEvent = NSEvent(cgEvent: event) {
+                    shortcutRecordingHandler?(recordingEvent)
+                }
+                return nil
+            }
+            return Unmanaged.passUnretained(event)
+        }
         let flags = NSEvent.ModifierFlags(rawValue: UInt(event.flags.rawValue))
         switch type {
         case .flagsChanged:

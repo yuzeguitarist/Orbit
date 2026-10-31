@@ -126,6 +126,18 @@ struct HotKeyState {
             return (true, actions + cancel(presentationIsVisible: presentationIsVisible))
         }
         let modifiers = flags.intersection(TriggerShortcut.allowedModifierFlags)
+        if let shortcut = config.customShortcut, code == shortcut.keyCode, modifiers == shortcut.modifiers {
+            consumedKeys.insert(code)
+            if !isRepeat {
+                if isVisible {
+                    if case .custom = activeSource { actions += cancel() }
+                    else { activeSource = .custom(shortcut) }
+                } else {
+                    actions += show(.custom(shortcut))
+                }
+            }
+            return (true, actions)
+        }
         if config.cmdTabEnabled, code == 48,
            modifiers == .command || modifiers == [.command, .shift] {
             consumedKeys.insert(code)
@@ -135,14 +147,6 @@ struct HotKeyState {
             } else if !isRepeat {
                 actions += show(.cmdTab)
                 if modifiers.contains(.shift) { actions.append(.cycle(previous: true)) }
-            }
-            return (true, actions)
-        }
-        if let shortcut = config.customShortcut, code == shortcut.keyCode, modifiers == shortcut.modifiers {
-            consumedKeys.insert(code)
-            if !isRepeat {
-                if isVisible { actions += cancel() }
-                else { actions += show(.custom(shortcut)) }
             }
             return (true, actions)
         }

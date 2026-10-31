@@ -75,7 +75,7 @@
 "modifier.disabled" = "Disabled";
 
 "triggerMode.hold" = "길게 누르기";
-"triggerMode.doubleTapAndHold" = "두 번 누른 뒤 길게 누르기";
+"triggerMode.doubleTapAndHold" = "한 번 누르고 놓은 뒤 다시 길게 누르기";
 "settings.trigger.mode" = "보조 키 동작";
 "settings.trigger.double_tap_hint" = "한 번 누르고 놓은 뒤 350ms 이내에 다시 누른 채로 유지하세요.";
 "settings.section.apps" = "응용 프로그램";
@@ -90,6 +90,6 @@
 "settings.apps.remove" = "규칙 제거";
 "settings.apps.choose" = "선택";
 "settings.usage.cancel" = "- Esc를 눌러 전환을 취소하고 현재 앱에 머무르기";
-"menu.help.trigger.double" = "%@를 두 번 누른 뒤 길게 눌러 전환기 열기";
-"main.help.trigger.double" = "%@를 두 번 누른 뒤 길게 눌러 앱 전환기 열기";
-"settings.usage.line1.double" = "- %@를 두 번 누른 뒤 길게 눌러 앱 전환기 열기";
+"menu.help.trigger.double" = "%@를 한 번 누르고 놓은 뒤 다시 길게 눌러 전환기 열기";
+"main.help.trigger.double" = "%@를 한 번 누르고 놓은 뒤 다시 길게 눌러 앱 전환기 열기";
+"settings.usage.line1.double" = "- %@를 한 번 누르고 놓은 뒤 다시 길게 눌러 앱 전환기 열기";

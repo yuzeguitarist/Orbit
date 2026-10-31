@@ -254,7 +254,11 @@ final class OrbitWindowController: NSObject, FileDragDelegate {
         if ringCoordinator.mode == .apps {
             let activated = ringCoordinator.appViewModel.activateSelectedApp()
             shouldRestorePreviousAppOnClose = !activated
-            closePanel()
+            if !activated, HotKeyService.shared.dismissStyle == .animated {
+                dismissAnimated()
+            } else {
+                closePanel()
+            }
         } else {
             // 剪贴板模式：先写入剪贴板，再关闭并粘贴到原来的 App。
             ringCoordinator.clipboardViewModel.copySelectedItem { [weak self] success in

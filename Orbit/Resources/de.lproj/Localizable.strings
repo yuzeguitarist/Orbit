@@ -69,7 +69,7 @@
 "settings.trigger.shortcut.record" = "Record";
 "settings.trigger.shortcut.recording" = "Recording...";
 "settings.trigger.shortcut.clear" = "Clear";
-"settings.trigger.shortcut.hint" = "Verwenden Sie eine Kombination mit Modifikatortaste oder eine F-Taste. Esc bricht die Aufnahme ab.";
+"settings.trigger.shortcut.hint" = "Verwenden Sie eine Kombination mit Modifikatortasten oder eine F-Taste. Esc bricht die Aufnahme ab.";
 "settings.trigger.shortcut.recording_hint" = "Press your shortcut now.";
 "settings.trigger.shortcut.needs_modifier" = "Verwenden Sie Command, Option oder Control mit einer Taste oder eine F-Taste.";
 "modifier.disabled" = "Disabled";
