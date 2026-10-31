@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// 弧顶梯形形状 - 严格同心圆扇形，保证平滑曲线
-struct ArcTrapezoidShape: Shape {
+nonisolated struct ArcTrapezoidShape: Shape {
     /// 左右边倾斜角度（亦即扇形的张角的一半）
     let slantAngle: Double
     /// 圆角半径
